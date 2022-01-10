@@ -1,0 +1,129 @@
+$error-label-color: #D9342B;
+
+.input_container {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Work Sans', sans-serif;
+    margin-top: 30px;
+    margin-bottom: 20px;
+
+    label {
+        height: 24px;
+        margin-left: 8px;
+    }
+
+    .input {
+        font-family: 'Open Sans', sans-serif;
+        background: var(--White);
+        border: 1px solid #367CB3;
+        box-sizing: border-box;
+        height: 40px;
+        display: flex;
+        align-items: center;
+
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.16);
+        border-radius: 4px;
+        padding-left: 8px;
+    }
+
+    .input > input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        font-size: 16px;
+        line-height: 30px;
+        background-color: transparent;
+
+        border: none;
+        outline: none;
+
+        &::placeholder {
+            color: var(--Gray60);
+        }
+    }
+
+
+    &[data-error="true"] {
+        label {
+            color: var(--JuntUs-Red)
+        }
+        .input {
+            border-color: var(--JuntUs-Red);
+        }
+    }
+
+    
+    &[data-value="true"] {
+        .input {
+            border-color: #15588C;
+        }
+    }
+
+    &:focus-within, &:focus, &:focus-visible {
+        .input {
+            border-color: #62A5D9;
+        }
+    }
+
+
+    &[data-disabled="true"] {
+        label {
+            color: var(--Gray65)
+        }
+        .input {
+            background-color: var(--Gray50);
+            border-color: var(--Gray65);
+        }
+    }
+}
+
+.placeholder {
+    color: var(--Gray60);
+    font-size: 15.5px;
+    // line-height: 30px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 90%;
+    margin-top: -6px;
+}
+
+.input_container input[type="file"] {
+    opacity: 0;
+}
+
+.input_container select {
+    border: none;
+    width: 97%;
+    padding: 0.4rem 0;
+    outline: none;
+}
+
+.input_container select:not(:empty) ~ .placeholder_select {
+    display: none;
+}
+
+.placeholder_select {
+    position: absolute;
+    color: var(--Gray60);
+    font-size: 15.5px;
+    // line-height: 30px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    margin-top: -6px;
+    pointer-events: none;
+}
+
+.input_container select {
+    border-radius: 2px;
+    color: #555;
+    font-size: inherit;
+    margin: 0;
+    overflow: hidden;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

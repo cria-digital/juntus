@@ -1,0 +1,279 @@
+.sections {
+    display: flex;
+    width: 80%;
+    height: 40px;
+
+    justify-content: center;
+    gap: 15%;
+
+    margin: auto;
+    border-bottom: 1px solid var(--Gray35);
+
+    .section {
+        cursor: pointer;
+        transition: all 0.3s;
+        &[data-active="true"]{
+            color: var(--JuntUs-Blue);
+            border-bottom: 2px solid var(--JuntUs-Blue);
+        }
+        &:not([data-active="true"]){
+            color: var(--Gray60);
+            border-bottom: 2px solid transparent;
+        }
+        h2 {
+            font-weight: 500;
+            margin: 0;
+        }
+    }
+}
+
+.mais-buscados, .minhas-visitas, .cadastrar-nova-rota, .convidados, .selo, .profile {
+    width: 90%;
+    margin: 40px auto;
+}
+
+.flex {
+    display: flex;
+}
+
+.j-even {
+    justify-content: space-evenly;
+}
+
+.licenças {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 5px;
+    margin: 0 auto;
+
+
+
+    img {
+        border-radius: 100%;
+        margin: 4px 25%;
+    }
+}
+
+.card {
+    background-color: var(--White);
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 10px 10px 25px 10px;
+    width: 90%;
+    min-height: 100px;
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h3 {
+        text-align: center;
+    }
+
+    & > div {
+        width: 90%;
+        gap: 4%;
+        min-height: 100px;
+    }
+}
+
+.rota-img {
+    width:50%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 3.5px;
+    background-image: url("https://localyse.eu/wp-content/uploads/2020/01/Screen-Shot-2020-01-03-at-08.59.32-1024x699.png");
+    background-position: center;
+}
+
+.card ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.row {
+    margin: 40px 0px;
+}
+
+.chart {
+    background-color: var(--Gray35);
+    width: 40%;
+    height: 200px;
+}
+
+.profile-card {
+    max-width: 370px;
+    min-width: 265px;
+    
+    img {
+        border-radius: 100%;
+        width: 80px;
+    }
+    .share-icon {
+        font-size: 25px;
+        margin-left: auto;
+        color: var(--JuntUs-Blue);
+    }
+    .card-profile-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        height: 100%;
+    }
+
+    h2 {
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+}
+
+.table {
+    width: 100%;
+    
+    border-radius: 15px;
+    overflow: hidden;
+
+    margin-bottom: 25px;
+
+    /// make tr odd background color gray
+    tr {
+        td {
+            width: 50%;
+            height: 25px;
+            padding: 10px 20px;
+
+            &:last-child {
+                text-align: right;
+            }
+        }
+
+        &:nth-child(odd) {
+            background-color: var(--White);
+        }
+
+        &:nth-child(even) {
+            background-color: var(--Gray15);
+        }
+    }
+}
+
+%item {
+    display: flex;
+    align-items: center;
+    height: 80px;
+    width: 80%;
+    margin: auto;
+
+    &:nth-child(odd){
+        background-color: var(--Gray15);
+    }
+
+    &:nth-child(even){
+        background-color: var(--White);
+    }
+
+}
+
+.rota-item {
+    @extend %item;
+
+    justify-content: space-evenly;
+
+    h4 {
+        font-weight: bold;
+    }
+
+    .icon{
+        width: 30px;
+        height: 30px;
+        background-color: var(--JuntUs-Blue);
+    }
+
+    .buttons button {
+        margin: 0px 10px;
+    }
+}
+
+.rede-item {
+    @extend %item;
+    padding: 0px 20px;
+    justify-content: space-between;
+
+    .rede-info {
+        display: flex;
+        justify-content: space-between;
+        width: 60%;
+    }
+
+    .pendente {
+        color: var(--Gray15);
+        padding: 0px 50px;
+        border-radius: 8px;
+        background-color: var(--JuntUs-LightOrange-01);
+    }
+}
+
+.pagination-profiler {
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+    margin: auto;
+    gap: 20px;
+    row-gap: 50px;
+
+    .profile-card {
+        min-width: 45%;
+    }
+}
+
+.input-card{
+    margin: 50px auto;
+}
+
+.loader_container {
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    border: 5px solid var(--Gray35); 
+    border-top: 5px solid var(--JuntUs-Blue); 
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s ease-out infinite;
+}
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .analise-list {
+      display: flex;
+      overflow-x: scroll;
+      padding-bottom: 25px;
+      max-width: 80vw;
+      gap: 25px;
+  }
+
+  .big-profile {
+      min-width: 500px !important;
+      min-height: 60vh;
+
+      img {
+          width: 120px;
+      }
+      h2 {
+          font-weight: 500;
+      }
+  }

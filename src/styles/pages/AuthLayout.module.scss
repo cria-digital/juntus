@@ -1,0 +1,32 @@
+$form-container-bshadow: 0px 4px 4px #000000;
+
+.container {
+    background-color: var(--Black);
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.form_container {
+    border-radius: 8px;
+    width: 700px;
+    height: 678px;
+    max-height: 90vh;
+    margin: auto;
+    background:  var(--Gray15);
+    box-shadow: $form-container-bshadow;
+}
+
+.logo_container {
+    text-align: center;
+
+    img {
+        width: 124px;
+        margin: 3vh 0px 1vh 0px;
+    }
+}

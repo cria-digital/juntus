@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;1,500&display=swap');
+
+:root {
+  --JuntUs-DarkBlue-01: #15588C;
+  --JuntUs-DarkBlue-02: #1F6499;
+  --JuntUs-DarkBlue-03: #2970A6;
+
+  --JuntUs-Blue: #367CB3;
+
+  --JuntUs-LightBlue-01: #4389BF;
+  --JuntUs-LightBlue-02: #5297CC;
+  --JuntUs-LightBlue-03: #62A5D9;
+
+  --JuntUs-DarkOrange-01: #CC671F;
+  --JuntUs-DarkOrange-02: #D67129;
+  --JuntUs-DarkOrange-03: #DE7931;
+
+  --JuntUs-Orange: #E48139;
+
+  --JuntUs-LightOrange-01: #FC9D58;
+  --JuntUs-LightOrange-02: #F5934C;
+  --JuntUs-LightOrange-03: #ED8A42;
+
+  --JuntUs-Red: #D9342B;
+  --JuntUs-Yellow:  #E6E039;
+  --JuntUs-Green: #6CA632;
+
+  --Black: #000000;
+  --Gray90: #171717;
+  --Gray80: #2D2D2D;
+  --Gray75: #444444;
+  --Gray70: #737373;
+  --Gray65: #8A8A8A;
+  --Gray60: #AEAEAE;
+  --Gray55: #BCBCBC;
+  --Gray50: #CECECE;
+  --Gray40: #D7D7D7;
+  --Gray35: #DDDDDD;
+  --Gray30: #EAEAEA;
+  --Gray25: #F0F0F0;  
+  --Gray20: #F4F4F4;
+  --Gray15: #F8F8F8;
+  --White: #FFFFFF;
+
+}
+
+h1 {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 39px;
+}
+
+h2 {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+h3 {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+body {
+  margin: 0;
+  font-family: Open Sans, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 30px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+span {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+label:not(#placeholder), table {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.catcha-container {
+  margin-top: 35px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10%;
+
+  margin-top: 40px;
+  margin-bottom: 24px;
+}
+
+.main {
+  display: flex;
+}
+
+.appear {
+  animation: appear 300ms ease-in-out;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  } 
+}

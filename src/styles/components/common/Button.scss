@@ -1,0 +1,49 @@
+.btn {
+  width: 200px;
+  height: 38px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.16);
+  border-radius: 4px;
+  border: none;
+
+  text-align: center;
+  letter-spacing: 0.1em;
+
+  color: var(--Gray15);
+
+  cursor: pointer;
+  transition: background-color 100ms 50ms;
+}
+
+.btn.primary {
+  background-color: var(--JuntUs-Blue);
+
+  &:hover {
+    background-color: var(--JuntUs-LightBlue-02);
+  }
+
+  &:active {
+    background-color: var(--JuntUs-DarkBlue-02);
+  }
+  
+  &:disabled {
+    background-color: var(--Gray40);
+    color: var(--Gray65);
+  }
+}
+
+.btn.secondary {
+  background-color: var(--JuntUs-Orange);
+
+  &:hover {
+    background-color: var(--JuntUs-LightOrange-02);
+  }
+
+  &:active {
+    background-color: var(--JuntUs-DarkOrange-02);
+  }
+  
+  &:disabled {
+    background-color: var(--Gray20);
+    color: var(--Gray65);
+  }
+}
