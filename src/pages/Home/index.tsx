@@ -63,7 +63,7 @@ function BuscaCard(props) {
           <b>Veículos</b>: <span>{props.veiculos}</span>
         </p>
         <p>
-          <b>Carrocerias</b>: <span>{props.carrocerias}</span>
+          <b> Carrocerias</b> : <span>{props.carrocerias}</span>
         </p>
         <div className="tags">
           <p>Rastreador</p>
