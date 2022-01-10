@@ -22,16 +22,15 @@ export default function MinhasRotas() {
 }
 
 function Item(props: any) {
-  const { municipioOrigem, municipioDestino, estadoOrigem, estadoDestino } =
-    props;
+  const [expanded, setExpanded] = useState(false);
+  const { municipioOrigem, municipioDestino, estadoOrigem, estadoDestino } = props;
 
   return (
     <IconContext.Provider value={{ size: "27", color: "var(--JuntUs-Blue)" }}>
       <div className="rota-item">
         <IoMapSharp />
         <h4 style={{ textTransform: "uppercase" }}>
-          {municipioOrigem}, {estadoOrigem} {" > "} {municipioDestino},{" "}
-          {estadoDestino}
+          {municipioOrigem}, {estadoOrigem} {" > "} {municipioDestino}, {estadoDestino}
         </h4>
 
         <div className="buttons">
@@ -39,7 +38,9 @@ function Item(props: any) {
           <Button type="primary">Editar</Button>
         </div>
 
-        <BsChevronCompactDown />
+        <div onClick={() => setExpanded(!expanded)}>
+          <BsChevronCompactDown />
+        </div>
       </div>
     </IconContext.Provider>
   );

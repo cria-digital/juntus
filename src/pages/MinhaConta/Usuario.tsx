@@ -27,55 +27,19 @@ export default function Usuario(props: any) {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(userData);
   };
 
   return (
     <div className="convidados">
-      <p>
-        Cadastre as rotas em que sua empresa atua para ser encontrado por
-        embarcadores!
-      </p>
+      <p>Cadastre as rotas em que sua empresa atua para ser encontrado por embarcadores!</p>
       <form onSubmit={handleSubmit}>
         <div style={{ display: "flex" }}>
-          <Input
-            width="45%"
-            type="text"
-            label="Nome completo"
-            name="nome"
-            placeholder="Digite seu nome completo"
-            onChange={changeField}
-            required
-          />
-          <Input
-            width="45%"
-            type="text"
-            label="E-mail corporativo"
-            name="email"
-            placeholder="Digite seu e-mail de trabalho"
-            onChange={changeField}
-            required
-          />
+          <Input width="45%" type="text" label="Nome completo" name="nome" placeholder="Digite seu nome completo" onChange={changeField} required />
+          <Input width="45%" type="text" label="E-mail corporativo" name="email" placeholder="Digite seu e-mail de trabalho" onChange={changeField} required />
         </div>
         <div style={{ display: "flex" }}>
-          <Input
-            width="45%"
-            type="text"
-            label="Cargo"
-            name="cargo"
-            placeholder="Digite seu cargo atual"
-            onChange={changeField}
-            required
-          />
-          <Input
-            width="45%"
-            type="text"
-            label="Telefone"
-            name="telefone"
-            placeholder="(31) 99999-9999"
-            onChange={changeField}
-            required
-          />
+          <Input width="45%" type="text" label="Cargo" name="cargo" placeholder="Digite seu cargo atual" onChange={changeField} required />
+          <Input width="45%" type="text" label="Telefone" name="telefone" placeholder="(31) 99999-9999" onChange={changeField} required />
         </div>
 
         <div className="buttons-container">

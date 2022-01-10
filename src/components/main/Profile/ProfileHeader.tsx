@@ -5,11 +5,12 @@ import { BsTelephone } from "react-icons/bs";
 import { AiOutlineMail } from "react-icons/ai";
 import { VscGlobe } from "react-icons/vsc";
 import Ratings from "components/common/Rating";
+import placeholderImg from "assets/placeholder.png";
 
 export default function ProfileHeader({ state }) {
   return (
     <div className="profile-info" style={{ marginBottom: 25 }}>
-      <img src="https://picsum.photos/id/237/300/300" alt="profile" />
+      <img src={placeholderImg} alt="profile" />
       <div className="profile-text" style={{ width: "90%" }}>
         <div className="profile-header">
           <div>

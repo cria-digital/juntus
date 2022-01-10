@@ -2,13 +2,11 @@ import Input from "components/common/Input";
 import Loading from "components/common/Loading";
 import { useState } from "react";
 
-const chunk = (arr: any, size: number) =>
-  Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
-    arr.slice(i * size, i * size + size)
-  );
+const chunk = (arr: any, size: number) => Array.from({ length: Math.ceil(arr.length / size) }, (v, i) => arr.slice(i * size, i * size + size));
 
 export default function Pagination(props: any) {
   const [pageIndex, setPage] = useState(1);
+  const { search = true } = props;
 
   if (!props.items.length) return <Loading />;
 
@@ -20,13 +18,11 @@ export default function Pagination(props: any) {
 
   return (
     <div className="pagination">
-      <div style={{ width: "30%", marginLeft: "auto", marginRight: "5%" }}>
-        <Input
-          type="search"
-          name="page"
-          placeholder="Busque por origem, veículo, carroceria..."
-        />
-      </div>
+      {search && (
+        <div style={{ width: "30%", marginLeft: "auto", marginRight: "5%" }}>
+          <Input type="search" name="page" placeholder="Busque por origem, veículo, carroceria..." />
+        </div>
+      )}
       <div {...props.containerProps}>
         {dividedItems[pageIndex - 1].map((item: any) => {
           return <Component key={item.id} {...item} />;
@@ -36,12 +32,7 @@ export default function Pagination(props: any) {
       <div className="pagination-buttons">
         {pagesArray.map((page: any) => {
           return (
-            <button
-              disabled={pageIndex === page + 1}
-              key={page}
-              onClick={() => setPage(page + 1)}
-              className={page === page ? "active" : ""}
-            >
+            <button disabled={pageIndex === page + 1} key={page} onClick={() => setPage(page + 1)} className={page === page ? "active" : ""}>
               {page + 1}
             </button>
           );

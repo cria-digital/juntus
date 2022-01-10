@@ -142,3 +142,30 @@ code {
     opacity: 1;
   } 
 }
+.busca-card {
+ 
+  margin: 25px auto !important;
+}
+
+.busca-card h3 {
+  text-align: left !important;
+}
+
+.profile-page {
+  margin-top: 25px !important;
+}
+
+.busca-card .tags {
+  display: flex;
+  justify-content: flex-end;
+  gap: 25px;
+
+  color: var(--Gray15)
+}
+
+.busca-card .tags p {
+  background-color: var(--JuntUs-LightOrange-01);
+  border-radius: 5px;
+  margin: 5px;
+  padding: 0px 20px;
+}

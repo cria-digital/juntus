@@ -45,21 +45,16 @@ const links = [
 function Sidebar(props: any) {
   const [active, setIsActive] = useState(false);
 
+  if (window.location.pathname === "/login") return null;
+
   return (
     <div className={styles.sidebar_container + " appear"} data-active={active}>
       <div className={styles.sidebar}>
-        <div
-          className={styles.nav_menu}
-          onClick={() => setIsActive((active) => !active)}
-        >
+        <div className={styles.nav_menu} onClick={() => setIsActive((active) => !active)}>
           {active ? <MdMenuOpen /> : <MdMenu />}
         </div>
         <div className={styles.top_container}>
-          <img
-            className={styles.photo}
-            src={placeholderImg}
-            alt="placeholder"
-          />
+          <img className={styles.photo} src={placeholderImg} alt="placeholder" />
           <h2>QB LOGÍSTICA</h2>
         </div>
         <nav>

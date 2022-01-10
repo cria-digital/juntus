@@ -11,11 +11,8 @@ const filter = {
 };
 
 export const fetchSinergia = async () => {
-  const response = await fetch(
-    `${process.env.REACT_APP_API_URL}/sinergia/buscar`,
-    { method: "POST", body: JSON.stringify(filter) }
-  );
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/sinergia/buscar`, { method: "POST", body: JSON.stringify(filter) });
   const result = await response.json();
-  console.log(result);
+
   return [result];
 };
