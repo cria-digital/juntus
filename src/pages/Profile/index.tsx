@@ -2,7 +2,12 @@ import "styles/pages/profile.scss";
 
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchLicencas, fetchProfile, fetchServicos, fetchVeiculos } from "helpers/api/profile";
+import {
+  fetchLicencas,
+  fetchProfile,
+  fetchServicos,
+  fetchVeiculos,
+} from "helpers/api/profile";
 import ProfileLayout from "components/layouts/ProfileLayout";
 import Loading from "components/common/Loading";
 import Card from "components/common/Cards/Card";
@@ -44,5 +49,5 @@ export default function Profile(props) {
         <ProfileLayout state={state} />
       </Card>
     );
-  return <ProfileLayout state={state} />;
+  return <ProfileLayout embarcadora state={state} />;
 }

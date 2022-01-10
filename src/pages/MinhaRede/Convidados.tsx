@@ -6,17 +6,16 @@ export default function Convidados(props: any) {
   return (
     <div className="convidados">
       <p>
-        Cadastre as rotas em que sua empresa atua para ser encontrado por
-        embarcadores!
+        Convide os transportadores da sua empresa para participarem da sua rede!
       </p>
       <form>
         <div style={{ display: "flex" }}>
           <Input
             width="45%"
             type="text"
-            label="E-mail do embarcador"
+            label="E-mail do transportador"
             name="email"
-            placeholder="embarcador@email.com"
+            placeholder="transportador@email.com"
             onChange={null}
           />
           <Input

@@ -1,7 +1,11 @@
 import Button from "components/common/Button";
 import Input from "components/common/Input";
 import Select from "components/common/Select";
-import { cadastrarRota, fetchCarrocerias, fetchVeiculos } from "helpers/api/rotas";
+import {
+  cadastrarRota,
+  fetchCarrocerias,
+  fetchVeiculos,
+} from "helpers/api/rotas";
 import React, { useEffect, useState } from "react";
 
 export default function CadastrarNovaRota() {
@@ -56,14 +60,40 @@ export default function CadastrarNovaRota() {
 
   return (
     <div className="cadastrar-nova-rota">
-      <p>Cadastre as rotas em que sua empresa atua para ser encontrado por embarcadores!</p>
+      <p>
+        Encontre o transportador ideal para a sua demanda em menos de um minuto!
+      </p>
       <form onSubmit={handleSubmit}>
         <div style={{ display: "flex" }}>
-          <Input width="45%" type="text" label="Origem da carga" name="municipioOrigemId" placeholder="Digite a região de origem" onChange={changeField} required />
-          <Input width="45%" type="text" label="Destino da carga" name="municipioDestinoId" placeholder="Digite a região de destino" onChange={changeField} required />
+          <Input
+            width="45%"
+            type="text"
+            label="Origem da carga"
+            name="municipioOrigemId"
+            placeholder="Digite a região de origem"
+            onChange={changeField}
+            required
+          />
+          <Input
+            width="45%"
+            type="text"
+            label="Destino da carga"
+            name="municipioDestinoId"
+            placeholder="Digite a região de destino"
+            onChange={changeField}
+            required
+          />
         </div>
         <div style={{ width: "45%", marginLeft: "2.5%" }}>
-          <Select width="100%" type="select" label="Quantidade de transportes ao mês" name="transportesMes" placeholder="Selecione a faixa" onChange={changeField} required>
+          <Select
+            width="100%"
+            type="select"
+            label="Quantidade de transportes ao mês"
+            name="transportesMes"
+            placeholder="Selecione a faixa"
+            onChange={changeField}
+            required
+          >
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -83,7 +113,12 @@ export default function CadastrarNovaRota() {
           <p>Carrocerias *</p>
           {carrocerias.map(({ nome, id }) => (
             <div className="rota-checkbox">
-              <input id={nome} type="checkbox" checked={data.carroceriasId.includes(id)} onChange={() => handleCheckbox(id, "carroceriasId")} />
+              <input
+                id={nome}
+                type="checkbox"
+                checked={data.carroceriasId.includes(id)}
+                onChange={() => handleCheckbox(id, "carroceriasId")}
+              />
               <label htmlFor={nome}>{nome}</label>
             </div>
           ))}
@@ -96,7 +131,12 @@ export default function CadastrarNovaRota() {
               className="rota-checkbox
             required"
             >
-              <input id={nome} type="checkbox" checked={data.veiculosId.includes(id)} onChange={() => handleCheckbox(id, "veiculosId")} />
+              <input
+                id={nome}
+                type="checkbox"
+                checked={data.veiculosId.includes(id)}
+                onChange={() => handleCheckbox(id, "veiculosId")}
+              />
               <label htmlFor={nome}>{nome}</label>
             </div>
           ))}

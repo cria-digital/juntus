@@ -9,35 +9,23 @@ const formatData = (data: any) => {
     to: `/empresa/${rede.empresaId}`,
     id: rede.empresaId,
     name: rede.nomeEmpresa,
-    sinergias: rede.quantidadeSinergias,
+    sinergias: 10,
     tableData: [
       {
-        name: "Segmento",
-        value: rede.segmento,
+        name: "Fundação",
+        value: rede.fundacao,
       },
       {
-        name: "Veículos inbound",
-        value: rede.veiculosInbound.join(", "),
+        name: "Matriz",
+        value: rede.matriz,
       },
       {
-        name: "Veículos outbound",
-        value: rede.veiculosOutbound.join(", "),
+        name: "Carro chefe",
+        value: rede.carroChefe,
       },
       {
-        name: "Serviços requeridos",
-        value: rede.servicos[0],
-      },
-      {
-        name: "Licenças",
-        value: rede.licencas.join(", "),
-      },
-      {
-        name: "Volume",
-        value: rede.volume,
-      },
-      {
-        name: "Prazo de pagamento",
-        value: rede.prazoPagamento,
+        name: "Volume de transportes",
+        value: "200",
       },
     ],
   }));

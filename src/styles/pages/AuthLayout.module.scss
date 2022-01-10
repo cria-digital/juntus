@@ -16,7 +16,7 @@ $form-container-bshadow: 0px 4px 4px #000000;
     border-radius: 8px;
     width: 700px;
     height: 678px;
-    max-height: 90vh;
+    max-height: 93vh;
     margin: auto;
     background:  var(--Gray15);
     box-shadow: $form-container-bshadow;
@@ -27,6 +27,6 @@ $form-container-bshadow: 0px 4px 4px #000000;
 
     img {
         width: 124px;
-        margin: 3vh 0px 1vh 0px;
+        margin: 5vh 0px 0vh 0px;
     }
 }

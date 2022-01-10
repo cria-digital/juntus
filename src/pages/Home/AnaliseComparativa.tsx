@@ -11,7 +11,12 @@ export default function AnaliseComparativa() {
     <div className="mais-buscados analise-comparativa">
       <div className="analise-list">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => (
-          <ProfileCard name="QB LOGÍSTICA" big tableData={tableData} to="/transportador/5" />
+          <ProfileCard
+            to={`/empresa/754`}
+            name="QB LOGÍSTICA"
+            big
+            tableData={tableData}
+          />
         ))}
       </div>
     </div>

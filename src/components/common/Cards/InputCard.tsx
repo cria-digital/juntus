@@ -3,7 +3,7 @@ import Input from "../Input";
 import Card from "./Card";
 
 export default function InputCard(props) {
-  if (props.children)
+  if (props.children && !props.noChildren)
     return (
       <Card>
         <div className="input-card">{props.children}</div>
@@ -20,6 +20,8 @@ export default function InputCard(props) {
             ))}
           </div>
         ))}
+
+        {props.children ? props.children : null}
 
         <div className="buttons-container">
           {props.buttons.map((button) => (

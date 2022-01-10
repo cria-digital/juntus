@@ -5,33 +5,47 @@ export const fetchRedes = async () => {
   return [
     {
       empresaId: 734,
-      nomeEmpresa: "XPTO Transportes",
+      nomeEmpresa: "QB LOGÍSTICA",
       quantidadeSinergias: 10,
-      segmento: "Alimentos",
-      veiculosInbound: ["Bitruck", "Carreta"],
-      veiculosOutbound: ["3/4", "Toco"],
-      servicos: ["Crossdocking", "Rastreamento via satélite", "Transporte DTA"],
-      licencas: ["AATPP/IBAMA", "SASSMAQ", "Registro Polícia Federal", "Resíduos Classe 1"],
-      volume: "250 transportes",
-      prazoPagamento: "180 dias após contrato",
+      fundação: "1997",
+      matriz: "Belo Horizonte",
+      carroChefe: "Lotação",
+      volumeDeTransportes: "200",
     },
     {
-      empresaId: 456,
-      nomeEmpresa: "Polar Transportes",
+      empresaId: 734,
+      nomeEmpresa: "QB LOGÍSTICA",
       quantidadeSinergias: 10,
-      segmento: "Cosméticos",
-      veiculosInbound: ["Truck", "VLC"],
-      veiculosOutbound: ["Vanderléia", "Bitrem"],
-      servicos: ["Distribuição last mile", "Subcontratação para transportadores digitais"],
-      licencas: ["Anvisa - Cosméticos", "Anvisa - Medicamentos Controlados"],
-      volume: "10 transportes",
-      prazoPagamento: "15 dias após descarga",
+      fundação: "1997",
+      matriz: "Belo Horizonte",
+      carroChefe: "Lotação",
+      volumeDeTransportes: "200",
+    },
+    {
+      empresaId: 734,
+      nomeEmpresa: "QB LOGÍSTICA",
+      quantidadeSinergias: 10,
+      fundação: "1997",
+      matriz: "Belo Horizonte",
+      carroChefe: "Lotação",
+      volumeDeTransportes: "200",
+    },
+    {
+      empresaId: 734,
+      nomeEmpresa: "QB LOGÍSTICA",
+      quantidadeSinergias: 10,
+      fundação: "1997",
+      matriz: "Belo Horizonte",
+      carroChefe: "Lotação",
+      volumeDeTransportes: "200",
     },
   ];
 };
 
 export const fetchConvidados = async () => {
-  const response = await fetch(`${process.env.REACT_APP_API_URL}/rede/convidados`);
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}/rede/convidados`
+  );
   const convidados = await response.json();
 
   return [
