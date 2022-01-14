@@ -6,10 +6,12 @@ import Ratings from "components/common/Rating";
 import Select from "components/common/Select";
 import Pagination from "components/hocs/Pagination";
 import SectionLayout from "components/layouts/SectionLayout";
+import { fetchBuscas } from "helpers/api/buscarSinergia";
+import { useEffect, useState } from "react";
 import AnaliseComparativa from "./AnaliseComparativa";
 import BuscarSinergia from "./BuscarSinergia";
 
-export default function Home() {
+export default function BuscarSinergias() {
   return (
     <div>
       <SectionLayout
@@ -42,28 +44,49 @@ const busca = {
   tags: ["ISO 9001", "Certificado Registro Exército", "Rastreador"],
 };
 
-const buscas = [busca, busca, busca, busca];
-
 function BuscasSalvas() {
+  const [buscas, setBuscas] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const results = await fetchBuscas();
+      setBuscas(results);
+    };
+
+    fetchData();
+  }, []);
+
   return (
-    <div className="mais-buscados">
+    <div className="page">
       <p> Consulte aqui seus filtros customizados de busca de sinergia </p>
-      <Pagination limit={5} search={false} items={buscas} Component={BuscaCard} />
+      <Pagination
+        limit={5}
+        search={false}
+        items={buscas}
+        Component={BuscaCard}
+      />
     </div>
   );
 }
 
 function BuscaCard(props) {
+  const {
+    nomeMunicipioOrigem,
+    siglaEstadoOrigem,
+    nomeMunicipioDestino,
+    siglaEstadoDestino,
+  } = props;
+
   return (
     <Card className="busca-card">
       <div>
-        <h3>{props.title}</h3>
-        <Ratings rating={props.rating} />
+        <h3>{`${nomeMunicipioOrigem}, ${siglaEstadoOrigem} > ${nomeMunicipioDestino}, ${siglaEstadoDestino}`}</h3>
+        <Ratings rating={4} />
         <p>
-          <b>Veículos</b>: <span>{props.veiculos}</span>
+          <b>Veículos</b>: <span>{props.veiculos.join(", ")}</span>
         </p>
         <p>
-          <b> Carrocerias</b> : <span>{props.carrocerias}</span>
+          <b> Carrocerias</b> : <span>{props.carrocerias.join(", ")}</span>
         </p>
         <div className="tags">
           <p>Rastreador</p>

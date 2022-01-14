@@ -1,3 +1,5 @@
-export default function ProfileCard(props: any) {
+export default function ProfileCard(props: {
+  children: JSX.Element | JSX.Element[];
+}) {
   return <section className="profile-card">{props.children}</section>;
 }

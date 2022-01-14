@@ -4,14 +4,15 @@ import InputCard from "components/common/Cards/InputCard";
 import Input from "components/common/Input";
 import { empresa1, empresa2, empresa3 } from "./empresaInputs";
 import placeholderImg from "assets/placeholder.png";
+import { editProfile } from "helpers/api/profile";
 
-export default function Empresa() {
+export default function Empresa(props: any) {
   return (
     <div className="convidados">
       <InputCard>
-        <ProfileInput />
+        <ProfileInput type={props.type} />
       </InputCard>
-      <InputCard {...empresa1} />
+      {props.type === "TRANSPORTADOR" && <InputCard {...empresa1} />}
       <InputCard {...empresa2} />
       <InputCard {...empresa3} />
     </div>
@@ -20,11 +21,32 @@ export default function Empresa() {
 
 function ProfileImage() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 25 }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 25,
+      }}
+    >
       <img src={placeholderImg} height="150" alt="Profile" />
       <div className="flex j-even">
-        <p style={{ margin: "0 10px", cursor: "pointer", color: "var(--JuntUs-Red)" }}>Remover logo</p>
-        <p style={{ margin: "0 10px", cursor: "pointer", color: "var(--JuntUs-Blue)" }}>
+        <p
+          style={{
+            margin: "0 10px",
+            cursor: "pointer",
+            color: "var(--JuntUs-Red)",
+          }}
+        >
+          Remover logo
+        </p>
+        <p
+          style={{
+            margin: "0 10px",
+            cursor: "pointer",
+            color: "var(--JuntUs-Blue)",
+          }}
+        >
           Alterar logo <br /> (até 100kb)
         </p>
       </div>
@@ -32,9 +54,18 @@ function ProfileImage() {
   );
 }
 
-function ProfileInput() {
+function ProfileInput(props: any) {
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+
+    const profile = await editProfile(data);
+    if (profile) alert("Perfil atualizado com sucesso!");
+  };
+
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <div
         className="flex"
         style={{
@@ -52,28 +83,95 @@ function ProfileInput() {
             justifyContent: "space-evenly",
           }}
         >
-          <Input width="45%" type="text" label="CNPJ" name="cnpj" placeholder="12.345.678/0001-12" required />
-          <Input width="45%" type="text" label="Razão Social" name="razao" placeholder="Informe o nome da empresa" required />
-          <Input width="45%" type="text" label="Segmento" name="segmento" placeholder="Informe os tipos de segmento" required />
-          <Input width="45%" type="text" label="Site" name="site" placeholder="www.site.com.br" required />
+          <Input
+            width="45%"
+            type="text"
+            label="CNPJ"
+            name="cnpj"
+            placeholder="12.345.678/0001-12"
+            required
+          />
+          <Input
+            width="45%"
+            type="text"
+            label="Razão Social"
+            name="razaoSocial"
+            placeholder="Informe o nome da empresa"
+            required
+          />
+          <Input
+            width="45%"
+            type="text"
+            label="Segmento"
+            name="segmento"
+            placeholder="Informe os tipos de segmento"
+            required
+          />
+          <Input
+            width="45%"
+            type="text"
+            label="Site"
+            name="site"
+            placeholder="www.site.com.br"
+            required
+          />
         </div>
       </div>
       <div className="flex">
-        <Input width="30%" type="text" label="Facebook" name="facebook" placeholder="facebook.com/empresa" required />
-        <Input width="30%" type="text" label="Instagram" name="instagram" placeholder="instagram.com/empresa" required />
-        <Input width="30%" type="text" label="Linkedin" name="linkedin" placeholder="linkedin.com/empresa" required />
+        <Input
+          width="30%"
+          type="text"
+          label="Facebook"
+          name="facebook"
+          placeholder="facebook.com/empresa"
+          required
+        />
+        <Input
+          width="30%"
+          type="text"
+          label="Instagram"
+          name="instagram"
+          placeholder="instagram.com/empresa"
+          required
+        />
+        <Input
+          width="30%"
+          type="text"
+          label="Linkedin"
+          name="linkedin"
+          placeholder="linkedin.com/empresa"
+          required
+        />
       </div>
       <div>
-        <Input width="97%" type="text" label="Sobre a empresa" name="sobre" placeholder="Conte um pouco sobre a histótia, as atividades... até 500 caracteres" required />
+        <Input
+          width="97%"
+          type="textarea"
+          label="Sobre a empresa"
+          name="sobre"
+          placeholder="Conte um pouco sobre a história, as atividades... até 500 caracteres"
+          height="200px"
+          maxLength={500}
+          required
+        />
       </div>
-      <div className="flex" style={{ justifyContent: "flex-start" }}>
-        <Input width="30%" type="text" label="Tipo de transporte" name="tipo_transporte" placeholder="Selecione o tipo de transporte" required />
-      </div>
+      {props.type === "TRANSPORTADOR" && (
+        <div className="flex" style={{ justifyContent: "flex-start" }}>
+          <Input
+            width="30%"
+            type="text"
+            label="Tipo de transporte"
+            name="tipo_transporte"
+            placeholder="Selecione o tipo de transporte"
+            required
+          />
+        </div>
+      )}
       <div className="buttons-container">
-        <Button type="primary" name="Salvar">
+        <Button type="primary" submit>
           Salvar
         </Button>
       </div>
-    </>
+    </form>
   );
 }

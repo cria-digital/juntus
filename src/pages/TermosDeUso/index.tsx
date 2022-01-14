@@ -1,17 +1,17 @@
 import SectionLayout from "components/layouts/SectionLayout";
-import { PoliticaDeSeguranca } from "texts";
+import { TermosDeUso } from "texts";
 
-export default function Seguranca() {
+export default function Termos() {
   return (
     <div className="page">
       <SectionLayout
-        sections={[{ title: "POLÍTICA DE PRIVACIDADE E SEGURANÇA" }]}
+        sections={[{ title: "TERMOS E CONDIÇÕES DE USO" }]}
         render={{
-          "POLÍTICA DE PRIVACIDADE E SEGURANÇA": (
+          "TERMOS E CONDIÇÕES DE USO": (
             <p
               style={{ marginTop: 100 }}
               dangerouslySetInnerHTML={{
-                __html: PoliticaDeSeguranca,
+                __html: TermosDeUso,
               }}
             ></p>
           ),

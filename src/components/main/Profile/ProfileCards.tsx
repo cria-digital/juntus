@@ -8,7 +8,7 @@ export default function ProfileCards({ state }) {
         <Card width="35%">
           <h2>VEÍCULOS DESEJADOS</h2>
           <div className="veiculos-desejados">
-            {state.veiculos.map((veiculo) => (
+            {state.veiculos.map((veiculo: any) => (
               <span key={veiculo.id}>{veiculo.nome}</span>
             ))}
           </div>
@@ -17,7 +17,7 @@ export default function ProfileCards({ state }) {
           <h2>LICENÇAS E CERTIFICADOS</h2>
           <Table
             noShadow
-            data={state.licencas.map((licenca) => ({
+            data={state.licencas.map((licenca: any) => ({
               name: licenca.nome,
               value: " ",
             }))}

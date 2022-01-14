@@ -1,8 +1,28 @@
 import { IconContext } from "react-icons/lib";
 import styles from "styles/components/common/Input.module.scss";
+import ReactSelect from "react-select";
+import { IInputProps } from "helpers/interfaces";
 
-export default function Select(props) {
-  const { type, value, error, width, disabled } = props;
+interface IProps {
+  type?: string;
+  value?: any;
+  onChange?: any;
+  error?: boolean;
+  disabled?: boolean;
+  placeholder: string;
+  width?: string;
+  required?: boolean;
+  label?: string;
+  height?: string;
+  name: string;
+  maxLength?: number;
+  options?: any[];
+  multiple?: boolean;
+  children?: any;
+}
+
+export default function Select(props: IProps) {
+  const { value, error, width, disabled } = props;
 
   const inputProps = {
     "data-value": !!value,
@@ -26,10 +46,12 @@ export default function Select(props) {
           </label>
         )}
         <div className={styles.input}>
-          <select id={props.name} {...props}>
-            <option value=""> {props.placeholder}</option>
-            {props.children}
-          </select>
+          <ReactSelect
+            isMulti={props.multiple}
+            className={styles.selectMultiple}
+            onInputChange={props.onChange}
+            {...props}
+          />
         </div>
       </div>
     </IconContext.Provider>

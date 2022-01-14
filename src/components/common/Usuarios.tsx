@@ -2,8 +2,14 @@ import { fetchConvidados } from "helpers/api/rede";
 import { useEffect, useState } from "react";
 import Loading from "./Loading";
 
+interface IProps {
+  email: string;
+  nome: string;
+  pendente: boolean;
+}
+
 export default function Usuarios() {
-  const [convidados, setConvidados] = useState([]);
+  const [convidados, setConvidados] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +26,7 @@ export default function Usuarios() {
       {!convidados.length ? (
         <Loading />
       ) : (
-        convidados.map((convidado) => (
+        convidados.map((convidado: IProps) => (
           <Item {...convidado} key={convidado.email} />
         ))
       )}
@@ -28,7 +34,7 @@ export default function Usuarios() {
   );
 }
 
-function Item(props: any) {
+function Item(props: IProps) {
   return (
     <div className="rede-item appear">
       <div className="rede-info">

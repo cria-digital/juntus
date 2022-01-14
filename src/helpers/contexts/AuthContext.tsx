@@ -5,6 +5,7 @@ export const AuthContext = createContext<IAuth>({
   auth: {
     isAuthenticated: true,
     user: null,
+    type: "EMBARCADOR",
   },
   setAuth: () => {},
 });
@@ -13,6 +14,7 @@ export default function AuthProvider(props: any) {
   const [auth, setAuth] = useState({
     isAuthenticated: true,
     user: null,
+    type: "EMBARCADOR",
   });
 
   return (

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styles from "styles/components/main/Sidebar.module.scss";
 
-import { BsSearch } from "react-icons/bs";
+import { BsSearch, BsFillLightbulbFill } from "react-icons/bs";
 import { MdMenu, MdMenuOpen } from "react-icons/md";
 import { IoMapSharp, IoShareSocialSharp } from "react-icons/io5";
 
@@ -14,12 +14,18 @@ import withProtection from "components/hocs/withProtection";
 
 import placeholderImg from "assets/placeholder.png";
 
-const links = [
-  {
-    name: "Buscar Sinergia",
-    path: "/",
-    icon: <BsSearch />,
-  },
+const getLinks = (type: string) => [
+  type === "EMBARCADOR"
+    ? {
+        name: "Buscar Sinergia",
+        path: "/",
+        icon: <BsSearch />,
+      }
+    : {
+        name: "Atualizações",
+        path: "/",
+        icon: <BsFillLightbulbFill />,
+      },
   {
     name: "Minhas rotas",
     path: "/minhas-rotas",
@@ -42,25 +48,34 @@ const links = [
   },
 ];
 
+const pathnames = ["/login", "/password-change", "/register"];
+
 function Sidebar(props: any) {
   const [active, setIsActive] = useState(false);
 
-  if (window.location.pathname === "/login") return null;
+  if (pathnames.includes(window.location.pathname)) return null;
 
   return (
     <div className={styles.sidebar_container + " appear"} data-active={active}>
       <div className={styles.sidebar}>
-        <div className={styles.nav_menu} onClick={() => setIsActive((active) => !active)}>
+        <div
+          className={styles.nav_menu}
+          onClick={() => setIsActive((active) => !active)}
+        >
           {active ? <MdMenuOpen /> : <MdMenu />}
         </div>
         <div className={styles.top_container}>
-          <img className={styles.photo} src={placeholderImg} alt="placeholder" />
+          <img
+            className={styles.photo}
+            src={placeholderImg}
+            alt="placeholder"
+          />
           <h2>QB LOGÍSTICA</h2>
         </div>
         <nav>
           <IconContext.Provider value={{ className: styles.sidebar_icon }}>
             <ul>
-              {links.map((link: any) => (
+              {getLinks(props.type).map((link: any) => (
                 <SidebarLink {...link} key={link.name} />
               ))}
             </ul>

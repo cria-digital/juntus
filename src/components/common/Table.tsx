@@ -1,4 +1,14 @@
-export default function Table(props: any) {
+interface IData {
+  name: string;
+  value: string;
+}
+
+interface IProps {
+  noShadow?: boolean;
+  data: IData[];
+}
+
+export default function Table(props: IProps) {
   return (
     <table
       className="table"

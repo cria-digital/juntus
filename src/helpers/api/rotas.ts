@@ -10,39 +10,8 @@ const cadastrarExemplo = {
 export const fetchRotas = async () => {
   const response = await fetch(`${process.env.REACT_APP_API_URL}/rota`);
   const rotas = await response.json();
-
-  return [
-    {
-      id: 5678,
-      municipioOrigem: "Belo Horizonte",
-      municipioDestino: "São Paulo",
-      estadoOrigem: "MG",
-      estadoDestino: "SP",
-      carrocerias: ["Baú Frigorífico", "Sider", "Caçamba", "Grade Baixa", "Graneleiro", "Prancha"],
-      veiculos: ["3/4", "Bitrem", "Bitruck", "Carreta", "Carreta LS"],
-      transportesMes: 230,
-    },
-    {
-      id: 5678,
-      municipioOrigem: "Belo Horizonte",
-      municipioDestino: "São Paulo",
-      estadoOrigem: "MG",
-      estadoDestino: "SP",
-      carrocerias: ["Baú Frigorífico", "Sider", "Caçamba", "Grade Baixa", "Graneleiro", "Prancha"],
-      veiculos: ["3/4", "Bitrem", "Bitruck", "Carreta", "Carreta LS"],
-      transportesMes: 230,
-    },
-    {
-      id: 5678,
-      municipioOrigem: "Belo Horizonte",
-      municipioDestino: "São Paulo",
-      estadoOrigem: "MG",
-      estadoDestino: "SP",
-      carrocerias: ["Baú Frigorífico", "Sider", "Caçamba", "Grade Baixa", "Graneleiro", "Prancha"],
-      veiculos: ["3/4", "Bitrem", "Bitruck", "Carreta", "Carreta LS"],
-      transportesMes: 230,
-    },
-  ];
+  console.log(rotas);
+  return rotas;
 };
 
 export const cadastrarRota = async (rota: any) => {
@@ -51,47 +20,41 @@ export const cadastrarRota = async (rota: any) => {
     body: JSON.stringify(rota),
   });
   const result = await response.json();
-
+  console.log(result);
   return result;
 };
 
+export const editarRota = async (rota: any) => {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/rota`, {
+    method: "PUT",
+    body: JSON.stringify(rota),
+  });
+  const result = await response.json();
+  console.log(result);
+  return result;
+};
+
+export const excluirRota = async (id: number) => {
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}/rota/` + id.toString(),
+    {
+      method: "DELETE",
+    }
+  );
+  console.log(response);
+  return response;
+};
+
 export const fetchVeiculos = async () => {
-  // const response = await fetch(`${process.env.REACT_APP_API_URL}/veiculo`);
-  // return await response.json();
-  return [
-    {
-      id: 1,
-      nome: "Bitrem",
-      porteVeiculoId: 2,
-    },
-    {
-      id: 2,
-      nome: "Toco",
-      porteVeiculoId: 5,
-    },
-    {
-      id: 3,
-      nome: "Carreta LS",
-      porteVeiculoId: 3,
-    },
-  ];
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/veiculo`);
+  const veiculos = await response.json();
+  console.log(veiculos);
+  return veiculos;
 };
 
 export const fetchCarrocerias = async () => {
-  // const response = await fetch(`${process.env.REACT_APP_API_URL}/carroceria`);
-  // return await response.json();
-  return [
-    {
-      id: 1,
-      nome: "Sider",
-    },
-    {
-      id: 2,
-      nome: "Baú",
-    },
-    {
-      id: 3,
-      nome: "Grade Baixa",
-    },
-  ];
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/carroceria`);
+  const carrocerias = await response.json();
+  console.log(carrocerias);
+  return carrocerias;
 };

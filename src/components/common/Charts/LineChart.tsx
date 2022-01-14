@@ -1,6 +1,6 @@
 import ReactApexChart from "react-apexcharts";
 
-const data = {
+const data: any = {
   series: [
     {
       name: "visitas",
@@ -52,7 +52,7 @@ const data = {
   },
 };
 
-export default function LineChart(props) {
+export default function LineChart() {
   return (
     <div id="chart">
       <ReactApexChart

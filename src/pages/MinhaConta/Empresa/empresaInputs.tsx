@@ -40,12 +40,12 @@ export const empresa1 = {
   buttons: [
     {
       type: "secondary",
-      name: "btn",
+      name: "btn-1",
       children: <span>Excluir</span>,
     },
     {
       type: "primary",
-      name: "btn",
+      name: "btn-2",
       children: <span>Salvar</span>,
     },
   ],
@@ -119,12 +119,12 @@ export const empresa2 = {
   buttons: [
     {
       type: "secondary",
-      name: "btn",
+      name: "btn-1",
       children: <span>Excluir</span>,
     },
     {
       type: "primary",
-      name: "btn",
+      name: "btn-2",
       children: <span>Salvar</span>,
     },
   ],
@@ -190,12 +190,12 @@ export const empresa3 = {
   buttons: [
     {
       type: "secondary",
-      name: "btn",
+      name: "btn-1",
       children: <span>Excluir</span>,
     },
     {
       type: "primary",
-      name: "btn",
+      name: "btn-2",
       children: <span>Salvar</span>,
     },
   ],

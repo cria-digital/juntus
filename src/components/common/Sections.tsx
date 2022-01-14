@@ -1,7 +1,13 @@
-export default function Sections(props: any) {
+interface IProps {
+  sections: any[];
+  section: string;
+  handleSection: (section: string) => void;
+}
+
+export default function Sections(props: IProps) {
   return (
     <div className="sections">
-      {props.sections.map((section: any) => {
+      {props.sections.map((section: { title: any }) => {
         return (
           <div
             className="section"

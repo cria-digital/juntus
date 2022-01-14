@@ -1,6 +1,6 @@
 import ReactApexChart from "react-apexcharts";
 
-const data = {
+const data: any = {
   series: [44, 55, 41, 40],
   labels: ["Caçamba", "Graneleira", "Grade baixa", "Baú"],
   options: {
@@ -36,7 +36,7 @@ const data = {
   },
 };
 
-export default function DonutChart(props) {
+export default function DonutChart() {
   return (
     <div id="chart">
       <ReactApexChart

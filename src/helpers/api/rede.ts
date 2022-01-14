@@ -1,45 +1,8 @@
 export const fetchRedes = async () => {
   const response = await fetch(`${process.env.REACT_APP_API_URL}/rede`);
   const redes = await response.json();
-
-  return [
-    {
-      empresaId: 734,
-      nomeEmpresa: "QB LOGÍSTICA",
-      quantidadeSinergias: 10,
-      fundação: "1997",
-      matriz: "Belo Horizonte",
-      carroChefe: "Lotação",
-      volumeDeTransportes: "200",
-    },
-    {
-      empresaId: 734,
-      nomeEmpresa: "QB LOGÍSTICA",
-      quantidadeSinergias: 10,
-      fundação: "1997",
-      matriz: "Belo Horizonte",
-      carroChefe: "Lotação",
-      volumeDeTransportes: "200",
-    },
-    {
-      empresaId: 734,
-      nomeEmpresa: "QB LOGÍSTICA",
-      quantidadeSinergias: 10,
-      fundação: "1997",
-      matriz: "Belo Horizonte",
-      carroChefe: "Lotação",
-      volumeDeTransportes: "200",
-    },
-    {
-      empresaId: 734,
-      nomeEmpresa: "QB LOGÍSTICA",
-      quantidadeSinergias: 10,
-      fundação: "1997",
-      matriz: "Belo Horizonte",
-      carroChefe: "Lotação",
-      volumeDeTransportes: "200",
-    },
-  ];
+  console.log(redes);
+  return redes;
 };
 
 export const fetchConvidados = async () => {
@@ -47,17 +10,19 @@ export const fetchConvidados = async () => {
     `${process.env.REACT_APP_API_URL}/rede/convidados`
   );
   const convidados = await response.json();
+  console.log(convidados);
+  return convidados;
+};
 
-  return [
+export const sendRequest = async (data: any) => {
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}/rede/convite/enviar`,
     {
-      email: "gerson@polartransportes.com",
-      nome: "Gerson",
-      pendente: true,
-    },
-    {
-      email: "adenilson@xpto.com",
-      nome: "Adenilson",
-      pendente: false,
-    },
-  ];
+      method: "POST",
+      body: JSON.stringify(data),
+    }
+  ).then((res) => res.json());
+
+  console.log(response);
+  return response;
 };

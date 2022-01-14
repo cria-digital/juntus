@@ -1,51 +1,53 @@
 import Header from "components/main/Header";
 import Sidebar from "components/main/Sidebar";
 import AuthProvider from "helpers/contexts/AuthContext";
-import Atualizações from "pages/Atualizações";
-import Login from "pages/Login";
+import Login from "pages/Auth/Login";
+import PasswordChange from "pages/Auth/PasswordChange";
+import Register from "pages/Auth/Register";
+import BuscarSinergias from "pages/Embarcador/BuscarSinergia";
 import MinhaConta from "pages/MinhaConta";
 import Rede from "pages/MinhaRede";
 import Rotas from "pages/MinhasRotas";
-import PasswordChange from "pages/PasswordChange";
 import PoliticaDeSeguranca from "pages/PoliticaDeSeguranca";
 import Profile from "pages/Profile";
 import SeloJuntUs from "pages/SeloJuntUs";
+import Termos from "pages/TermosDeUso";
+import Atualizações from "pages/Transportador/Atualizações";
+import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Teste from "styles/pages/Teste";
 
-import AOS from "aos";
-import "aos/dist/aos.css";
-
-import { useEffect } from "react";
-import Home from "pages/Home";
-
 function App() {
-  useEffect(() => {
-    AOS.init({
-      duration: 2000,
-    });
-  }, []);
+  const [type, setType] = useState("EMBARCADOR");
 
   return (
     <AuthProvider>
       <BrowserRouter>
         <main className="main">
-          <Sidebar />
+          <Sidebar type={type} />
           <div style={{ width: "100%" }}>
-            <Header />
+            <Header setType={setType} />
 
             <Routes>
-              <Route path="/" element={<Home />} />
+              {/* Auth Routes */}
               <Route path="login" element={<Login />} />
-              <Route path="atualizações" element={<Atualizações />} />
-              <Route path="minhas-rotas" element={<Rotas />} />
-              <Route path="minha-rede" element={<Rede />} />
-              <Route path="selo-juntus" element={<SeloJuntUs />} />
-              <Route path="minha-conta" element={<MinhaConta />} />
-              <Route path="empresa/:id" element={<Profile />} />
-
-              <Route path="politica-de-seguranca" element={<PoliticaDeSeguranca />} />
               <Route path="password-change" element={<PasswordChange />} />
+              <Route path="register" element={<Register />} />
+
+              <Route path="/" element={<HomeRoute type={type} />} />
+
+              <Route path="minhas-rotas" element={<Rotas />} />
+              <Route path="minha-rede" element={<Rede type={type} />} />
+              <Route path="selo-juntus" element={<SeloJuntUs />} />
+
+              <Route path="minha-conta" element={<MinhaConta type={type} />} />
+
+              <Route path="empresa/:id" element={<Profile />} />
+              <Route
+                path="politica-de-seguranca"
+                element={<PoliticaDeSeguranca />}
+              />
+              <Route path="termos-de-uso" element={<Termos />} />
               <Route path="*" element={<Teste />} />
             </Routes>
           </div>
@@ -56,3 +58,10 @@ function App() {
 }
 
 export default App;
+
+function HomeRoute({ type }: { type: string }) {
+  if (type === "TRANSPORTADOR") return <Atualizações />;
+  if (type === "EMBARCADOR") return <BuscarSinergias />;
+
+  return null;
+}

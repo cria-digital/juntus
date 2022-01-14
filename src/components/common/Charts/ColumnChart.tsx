@@ -1,6 +1,6 @@
 import ReactApexChart from "react-apexcharts";
 
-const data = {
+const data: any = {
   series: [
     {
       data: [
@@ -67,7 +67,7 @@ const data = {
   },
 };
 
-export default function ColumnChart(props) {
+export default function ColumnChart() {
   return (
     <div id="chart">
       <ReactApexChart

@@ -164,8 +164,6 @@
 
 %item {
     display: flex;
-    align-items: center;
-    height: 80px;
     width: 80%;
     margin: auto;
 
@@ -180,9 +178,17 @@
 }
 
 .rota-item {
-    @extend %item;
+    flex-direction: column;
+    
+    & > div:first-of-type {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        height: 80px;
+    }
 
-    justify-content: space-evenly;
+    @extend %item;
 
     h4 {
         font-weight: bold;
@@ -197,10 +203,20 @@
     .buttons button {
         margin: 0px 10px;
     }
+
+    .expanded {
+        margin-left: 10%;
+        font-size: 14px;
+        ul {
+            list-style-type: none;
+        }
+    }
 }
 
 .rede-item {
     @extend %item;
+    align-items: center;
+    height: 80px;
     padding: 0px 20px;
     justify-content: space-between;
 

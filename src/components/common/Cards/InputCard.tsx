@@ -2,7 +2,14 @@ import Button from "../Button";
 import Input from "../Input";
 import Card from "./Card";
 
-export default function InputCard(props) {
+interface IProps {
+  children?: JSX.Element;
+  noChildren?: boolean;
+  inputs?: any[];
+  buttons?: any[];
+}
+
+export default function InputCard(props: IProps) {
   if (props.children && !props.noChildren)
     return (
       <Card>

@@ -4,7 +4,7 @@ import chartImage from "assets/chart.png";
 import LineChart from "components/common/Charts/LineChart";
 import { useEffect, useState } from "react";
 import { fetchVisitas } from "helpers/api/home";
-import { fetchSinergia } from "helpers/api/sinergia";
+import { fetchSinergia } from "helpers/api/buscarSinergia";
 
 const formatData = (data: any) => {
   return data.map((rede: any) => ({

@@ -113,6 +113,15 @@ code {
     monospace;
 }
 
+.page {
+  width: 90%;
+  margin: 40px auto;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .catcha-container {
   margin-top: 2vh;
 }
@@ -168,4 +177,8 @@ code {
   border-radius: 5px;
   margin: 5px;
   padding: 0px 20px;
+}
+
+.register .input-container {
+  margin-top: 1.5vh;
 }

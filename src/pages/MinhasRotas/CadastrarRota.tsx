@@ -8,6 +8,11 @@ import {
 } from "helpers/api/rotas";
 import React, { useEffect, useState } from "react";
 
+const options = Array.from(Array(10).keys()).map((i) => ({
+  id: i + 1,
+  label: i + 1,
+}));
+
 export default function CadastrarNovaRota() {
   const [veiculos, setVeiculos] = useState([]);
   const [carrocerias, setCarrocerias] = useState([]);
@@ -15,6 +20,7 @@ export default function CadastrarNovaRota() {
   const [data, setData] = useState({
     carroceriasId: [],
     veiculosId: [],
+    transportesMes: "",
   });
 
   useEffect(() => {
@@ -47,6 +53,13 @@ export default function CadastrarNovaRota() {
     setData({
       ...data,
       [e.target.name]: e.target.value,
+    });
+  };
+
+  const changeSelectField = (newValue: any) => {
+    setData({
+      ...data,
+      transportesMes: newValue.value,
     });
   };
 
@@ -91,28 +104,16 @@ export default function CadastrarNovaRota() {
             label="Quantidade de transportes ao mês"
             name="transportesMes"
             placeholder="Selecione a faixa"
-            onChange={changeField}
+            onChange={changeSelectField}
             required
-          >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-          </Select>
+            options={options}
+          ></Select>
         </div>
 
         <div>
           <p>Carrocerias *</p>
           {carrocerias.map(({ nome, id }) => (
-            <div className="rota-checkbox">
+            <div className="rota-checkbox" key={id}>
               <input
                 id={nome}
                 type="checkbox"
@@ -127,10 +128,7 @@ export default function CadastrarNovaRota() {
         <div>
           <p>Veículos *</p>
           {veiculos.map(({ nome, id }) => (
-            <div
-              className="rota-checkbox
-            required"
-            >
+            <div key={id} className="rota-checkbox">
               <input
                 id={nome}
                 type="checkbox"
@@ -143,9 +141,7 @@ export default function CadastrarNovaRota() {
         </div>
 
         <div className="buttons-container">
-          <Button type="secondary" onClick={null}>
-            Importar
-          </Button>
+          <Button type="secondary">Importar</Button>
           <Button type="primary" submit>
             Cadastrar
           </Button>

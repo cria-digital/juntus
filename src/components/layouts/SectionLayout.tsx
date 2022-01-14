@@ -1,8 +1,15 @@
 import Sections from "components/common/Sections";
 import { useEffect, useState } from "react";
 
-export default function SectionLayout(props: any) {
-  const [section, setSection] = useState("Mais Buscados");
+interface IProps {
+  sections: {
+    title: string;
+  }[];
+  render: any;
+}
+
+export default function SectionLayout(props: IProps) {
+  const [section, setSection] = useState<string>("Mais Buscados");
   const handleSection = (value: string) => {
     setSection(value);
   };

@@ -6,12 +6,14 @@ import Select from "components/common/Select";
 import { useState } from "react";
 import placeholderImg from "assets/placeholder.png";
 
-export default function Results({ inputs }) {
+export default function Results({ inputs, results }) {
   const [filter, setFilter] = useState(false);
   return (
-    <div className="mais-buscados">
+    <div className="page">
       <p>5 transportadores encontrados (0,56 segundos)</p>
-      <p>Filtre a busca por transportadores de acordo com os critérios desejados. </p>
+      <p>
+        Filtre a busca por transportadores de acordo com os critérios desejados.{" "}
+      </p>
 
       {filter ? (
         <Filters inputs={inputs} setFilter={setFilter} />
@@ -23,33 +25,36 @@ export default function Results({ inputs }) {
         </div>
       )}
 
-      <BuscaCard />
-      <BuscaCard />
-      <BuscaCard />
-      <BuscaCard />
-      <BuscaCard />
+      {results.map((item) => (
+        <BuscaCard key={item.empresaId} {...item} />
+      ))}
     </div>
   );
 }
 
-function BuscaCard() {
+function BuscaCard(props: any) {
   return (
     <div className="flex" style={{ alignItems: "center" }}>
       <input type="checkbox" style={{ width: 30, height: 30 }} />
       <Card className="busca-card">
         <div className="flex">
-          <img src={placeholderImg} height="80" width="80" style={{ margin: 25 }} />
+          <img
+            src={placeholderImg}
+            height="80"
+            width="80"
+            style={{ margin: 25 }}
+          />
           <div>
-            <h3>{"QB Logística"}</h3>
+            <h3>{props.nomeEmpresa}</h3>
             <Ratings rating={3.5} />
             <p>
-              <b>Rotas</b>: <span>Belo Horizonte, MG {">"} São Paulo, SP</span>
+              <b>Rotas</b>: <span>{props.rotas.join(", ")}</span>
             </p>
             <p>
-              <b>Veículos</b>: <span>Bitrem, Bitruck, Carreta, Toco</span>
+              <b>Veículos</b>: <span>{props.veiculos.join(", ")}</span>
             </p>
             <p>
-              <b>Carrocerias</b>: <span>Baú, Caçamba, Cegonheiro</span>
+              <b>Carrocerias</b>: <span>{props.carrocerias.join(", ")}</span>
             </p>
 
             <div className="tags">
@@ -68,14 +73,24 @@ function Filters({ inputs, setFilter }) {
   return (
     <>
       <div className="flex">
-        <Select width="22%" placeholder="Selecione o(s) veículo(s)" label="Veículos" name="veiculos">
+        <Select
+          width="22%"
+          placeholder="Selecione o(s) veículo(s)"
+          label="Veículos"
+          name="veiculos"
+        >
           {inputs.veiculos.map((data: any) => (
             <option key={data.id} value={data.id}>
               {data.nome}
             </option>
           ))}
         </Select>
-        <Select width="22%" placeholder="Selecione a(s) carroceria(s)" label="Carrocerias" name="Carrocerias">
+        <Select
+          width="22%"
+          placeholder="Selecione a(s) carroceria(s)"
+          label="Carrocerias"
+          name="Carrocerias"
+        >
           {inputs.carrocerias.map((data: any) => (
             <option key={data.id} value={data.id}>
               {data.nome}
@@ -83,7 +98,12 @@ function Filters({ inputs, setFilter }) {
           ))}
         </Select>
 
-        <Select width="22%" placeholder="Selecione o(s) serviços" label="Serviços" name="servicos">
+        <Select
+          width="22%"
+          placeholder="Selecione o(s) serviços"
+          label="Serviços"
+          name="servicos"
+        >
           {inputs.servicos.map((data: any) => (
             <option key={data.id} value={data.id}>
               {data.nome}
@@ -91,7 +111,12 @@ function Filters({ inputs, setFilter }) {
           ))}
         </Select>
 
-        <Select width="22%" placeholder="Selecione uma ou mais licenças" label="Licenças" name="licencas">
+        <Select
+          width="22%"
+          placeholder="Selecione uma ou mais licenças"
+          label="Licenças"
+          name="licencas"
+        >
           {inputs.licencas.map((data: any) => (
             <option key={data.id} value={data.id}>
               {data.nome}
