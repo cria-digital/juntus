@@ -45,7 +45,5 @@ export const editProfile = async (data: any) => {
     }
   ).then((res) => res.json());
 
-  console.log(response);
-
   return response;
 };
