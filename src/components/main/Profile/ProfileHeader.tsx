@@ -7,7 +7,7 @@ import { VscGlobe } from "react-icons/vsc";
 import Ratings from "components/common/Rating";
 import placeholderImg from "assets/placeholder.png";
 
-export default function ProfileHeader({ state }) {
+export default function ProfileHeader({ state }: any) {
   return (
     <div className="profile-info" style={{ marginBottom: 25 }}>
       <img src={placeholderImg} alt="profile" />

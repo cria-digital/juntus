@@ -15,7 +15,6 @@ import Termos from "pages/TermosDeUso";
 import Atualizações from "pages/Transportador/Atualizações";
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Teste from "styles/pages/Teste";
 
 function App() {
   const [type, setType] = useState("EMBARCADOR");
@@ -48,7 +47,7 @@ function App() {
                 element={<PoliticaDeSeguranca />}
               />
               <Route path="termos-de-uso" element={<Termos />} />
-              <Route path="*" element={<Teste />} />
+              <Route path="*" element={<h1>Not Found</h1>} />
             </Routes>
           </div>
         </main>

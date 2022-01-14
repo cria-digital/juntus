@@ -26,14 +26,12 @@ export const fetchVeiculos = async (id: number | string) => {
   return response;
 };
 
-interface IEditData {
-  razaoSocial: string;
-  segmento: string;
-  site: string;
-  facebook: string;
-  instagram: string;
-  linkedin: string;
-}
+export const fetchClientes = async (id: number | string) => {
+  const response = await fetch(
+    process.env.REACT_APP_API_URL + "/empresa/" + id + "/clientes"
+  ).then((res) => res.json());
+  return response;
+};
 
 export const editProfile = async (data: any) => {
   const response = await fetch(

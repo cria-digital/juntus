@@ -1,10 +1,9 @@
+import placeholderImg from "assets/placeholder.png";
 import Button from "components/common/Button";
 import Card from "components/common/Cards/Card";
-import Input from "components/common/Input";
 import Ratings from "components/common/Rating";
 import Select from "components/common/Select";
 import { useState } from "react";
-import placeholderImg from "assets/placeholder.png";
 
 export default function Results({ inputs, results }) {
   const [filter, setFilter] = useState(false);

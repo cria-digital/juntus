@@ -1,7 +1,7 @@
 import { IInputProps } from "helpers/interfaces";
 import { IconContext } from "react-icons/lib";
 import { MdFileUpload, MdSearch } from "react-icons/md";
-import styles from "styles/components/common/Input.module.scss";
+import styles from "styles/components/Input.module.scss";
 
 const getIcon = (type: string) =>
   type === "search" ? <MdSearch /> : type === "file" ? <MdFileUpload /> : null;

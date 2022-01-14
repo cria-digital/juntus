@@ -3,17 +3,7 @@ import Input from "components/common/Input";
 import Loading from "components/common/Loading";
 import Select from "components/common/Select";
 import { fetchSinergia, saveFilter } from "helpers/api/buscarSinergia";
-import {
-  fetchCarrocerias,
-  fetchFaturamento,
-  fetchFuncionarios,
-  fetchLicencas,
-  fetchPortes,
-  fetchServicos,
-  fetchUnidades,
-  fetchVeiculos,
-  fetchVolumes,
-} from "helpers/api/sinergias";
+import * as api from "helpers/api/sinergias";
 import { IFilter } from "helpers/interfaces";
 import { useEffect, useState } from "react";
 import Results from "./Results";
@@ -52,15 +42,15 @@ export default function BuscarSinergia() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const veiculos = await fetchVeiculos();
-      const carrocerias = await fetchCarrocerias();
-      const servicos = await fetchServicos();
-      const licencas = await fetchLicencas();
-      const unidades = await fetchUnidades();
-      const portes = await fetchPortes();
-      const faturamentos = await fetchFaturamento();
-      const funcionarios = await fetchFuncionarios();
-      const volumes = await fetchVolumes();
+      const veiculos = await api.fetchVeiculos();
+      const carrocerias = await api.fetchCarrocerias();
+      const servicos = await api.fetchServicos();
+      const licencas = await api.fetchLicencas();
+      const unidades = await api.fetchUnidades();
+      const portes = await api.fetchPortes();
+      const faturamentos = await api.fetchFaturamento();
+      const funcionarios = await api.fetchFuncionarios();
+      const volumes = await api.fetchVolumes();
 
       setInputs({
         veiculos,

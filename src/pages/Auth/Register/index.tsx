@@ -51,7 +51,7 @@ export default function Register() {
     setState((state) => ({ ...state, success: true }));
   };
 
-  const nextSection = (e) => {
+  const nextSection = (e: any) => {
     e.preventDefault();
 
     if (data.password !== data.confirmPassword)
@@ -65,7 +65,7 @@ export default function Register() {
     setState((state) => ({ ...state, section: state.section + 1 }));
   };
 
-  const lastSection = (e) =>
+  const lastSection = (e: any) =>
     setState((state) => ({ ...state, section: state.section - 1 }));
 
   const { sections, section } = state;

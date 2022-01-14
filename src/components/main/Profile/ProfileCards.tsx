@@ -1,7 +1,7 @@
 import Table from "components/common/Table";
 import Card from "components/common/Cards/Card";
 
-export default function ProfileCards({ state }) {
+export default function ProfileCards({ state }: any) {
   return (
     <div>
       <div className="flex">

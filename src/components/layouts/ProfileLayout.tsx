@@ -7,7 +7,7 @@ import Table from "components/common/Table";
 import ColumnChart from "components/common/Charts/ColumnChart";
 import DonutChart from "components/common/Charts/DonutChart";
 
-export default function ProfileLayout({ state, embarcadora = false }) {
+export default function ProfileLayout({ state, charts = false }) {
   return (
     <div className="profile">
       <ProfileHeader state={state} />
@@ -27,11 +27,7 @@ export default function ProfileLayout({ state, embarcadora = false }) {
         </div>
       </div>
 
-      {embarcadora ? (
-        <EmbarcadoraCards state={state} />
-      ) : (
-        <ProfileCards state={state} />
-      )}
+      {charts ? <ChartsCards state={state} /> : <ProfileCards state={state} />}
     </div>
   );
 }
@@ -56,7 +52,7 @@ function ProfileInfo({ state }) {
   );
 }
 
-function EmbarcadoraCards({ state }) {
+function ChartsCards({ state }) {
   return (
     <div>
       <div className="flex">
@@ -112,6 +108,34 @@ function EmbarcadoraCards({ state }) {
           <DonutChart />
         </div>
       </Card>
+
+      <div className="clientes-container">
+        <h1>CLIENTES</h1>
+        <div className="clientes-list">
+          <img
+            src={
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Ambev_logo.svg/1200px-Ambev_logo.svg.png"
+            }
+            alt="ambev"
+          />
+          <img
+            src={"https://logospng.org/download/pepsi/logo-pepsi-icon-256.png"}
+            alt="pepsi"
+          />
+          <img
+            src={
+              "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Coca-Cola_logo.svg/2560px-Coca-Cola_logo.svg.png"
+            }
+            alt="coca cola"
+          />
+        </div>
+      </div>
+      <div className="flex j-even">
+        <div className="cliente-photo" />
+        <div className="cliente-photo" />
+        <div className="cliente-photo" />
+        <div className="cliente-photo" />
+      </div>
     </div>
   );
 }

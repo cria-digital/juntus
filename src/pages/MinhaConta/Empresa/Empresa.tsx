@@ -1,14 +1,13 @@
+import placeholderImg from "assets/placeholder.png";
 import Button from "components/common/Button";
-import Card from "components/common/Cards/Card";
 import InputCard from "components/common/Cards/InputCard";
 import Input from "components/common/Input";
-import { empresa1, empresa2, empresa3 } from "./empresaInputs";
-import placeholderImg from "assets/placeholder.png";
 import { editProfile } from "helpers/api/profile";
+import { empresa1, empresa2, empresa3 } from "./empresaInputs";
 
 export default function Empresa(props: any) {
   return (
-    <div className="convidados">
+    <div className="page">
       <InputCard>
         <ProfileInput type={props.type} />
       </InputCard>

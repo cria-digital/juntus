@@ -7,6 +7,7 @@ import {
   fetchProfile,
   fetchServicos,
   fetchVeiculos,
+  fetchClientes,
 } from "helpers/api/profile";
 import ProfileLayout from "components/layouts/ProfileLayout";
 import Loading from "components/common/Loading";
@@ -25,7 +26,7 @@ const initialState = {
   veiculos: [],
 };
 
-export default function Profile(props) {
+export default function Profile(props: any) {
   const { id } = useParams();
   const [state, setState] = useState(initialState);
 
@@ -35,7 +36,15 @@ export default function Profile(props) {
       const servicos = await fetchServicos(id);
       const licencas = await fetchLicencas(id);
       const veiculos = await fetchVeiculos(id);
-      setState({ ...perfil, servicos, licencas, veiculos, loading: false });
+      const clientes = await fetchClientes(id);
+      setState({
+        ...perfil,
+        servicos,
+        licencas,
+        veiculos,
+        clientes,
+        loading: false,
+      });
     };
 
     fetchData();
@@ -46,8 +55,8 @@ export default function Profile(props) {
   if (props.isProfile)
     return (
       <Card className="profile-page">
-        <ProfileLayout state={state} />
+        <ProfileLayout charts={props.type !== "EMBARCADOR"} state={state} />
       </Card>
     );
-  return <ProfileLayout embarcadora state={state} />;
+  return <ProfileLayout charts={props.type === "EMBARCADOR"} state={state} />;
 }

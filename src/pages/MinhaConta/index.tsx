@@ -16,8 +16,8 @@ export default function MinhaConta(props: any) {
       render={{
         Usuário: <Usuario />,
         Empresa: <Empresa type={props.type} />,
-        Operação: <Operacao />,
-        Perfil: <Profile isProfile />,
+        Operação: <Operacao type={props.type} />,
+        Perfil: <Profile type={props.type} isProfile />,
       }}
     />
   );

@@ -1,5 +1,5 @@
 import { IconContext } from "react-icons/lib";
-import styles from "styles/components/common/Input.module.scss";
+import styles from "styles/components/Input.module.scss";
 import ReactSelect from "react-select";
 import { IInputProps } from "helpers/interfaces";
 

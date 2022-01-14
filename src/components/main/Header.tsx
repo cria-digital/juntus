@@ -1,6 +1,6 @@
 import withProtection from "components/hocs/withProtection";
 import { Notification, HelpCircle, Exit } from "react-coolicons";
-import styles from "styles/components/main/Header.module.scss";
+import styles from "styles/components/Header.module.scss";
 
 const pathnames = ["/login", "/password-change", "/register"];
 
@@ -17,7 +17,7 @@ function Header(props: any) {
         </div>
         <div
           onClick={() =>
-            props.setType((type) =>
+            props.setType((type: string) =>
               type === "EMBARCADOR" ? "TRANSPORTADOR" : "EMBARCADOR"
             )
           }

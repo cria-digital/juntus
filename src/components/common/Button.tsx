@@ -1,5 +1,5 @@
 import { IButtonProps } from "helpers/interfaces";
-import "styles/components/common/Button.scss";
+import "styles/components/Button.scss";
 
 export default function Button(props: IButtonProps) {
   return (

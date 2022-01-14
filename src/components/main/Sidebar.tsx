@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import styles from "styles/components/main/Sidebar.module.scss";
+import styles from "styles/components/Sidebar.module.scss";
 
 import { BsSearch, BsFillLightbulbFill } from "react-icons/bs";
 import { MdMenu, MdMenuOpen } from "react-icons/md";
@@ -13,6 +13,7 @@ import { IconContext } from "react-icons/lib";
 import withProtection from "components/hocs/withProtection";
 
 import placeholderImg from "assets/placeholder.png";
+import placeholderImg2 from "assets/placeholder2.png";
 
 const getLinks = (type: string) => [
   type === "EMBARCADOR"
@@ -67,10 +68,12 @@ function Sidebar(props: any) {
         <div className={styles.top_container}>
           <img
             className={styles.photo}
-            src={placeholderImg}
+            src={props.type === "EMBARCADOR" ? placeholderImg2 : placeholderImg}
             alt="placeholder"
           />
-          <h2>QB LOGÍSTICA</h2>
+          <h2>
+            {props.type === "EMBARCADOR" ? "AGÊNCIA UXK" : "QB LOGÍSTICA"}
+          </h2>
         </div>
         <nav>
           <IconContext.Provider value={{ className: styles.sidebar_icon }}>
@@ -112,4 +115,4 @@ function SidebarLink(props: any) {
   );
 }
 
-export default withProtection(Sidebar);
+export default Sidebar;

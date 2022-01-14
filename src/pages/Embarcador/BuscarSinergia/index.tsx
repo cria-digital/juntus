@@ -1,9 +1,5 @@
-import Button from "components/common/Button";
 import Card from "components/common/Cards/Card";
-import ProfileCard from "components/common/Cards/ProfileCard";
-import Input from "components/common/Input";
 import Ratings from "components/common/Rating";
-import Select from "components/common/Select";
 import Pagination from "components/hocs/Pagination";
 import SectionLayout from "components/layouts/SectionLayout";
 import { fetchBuscas } from "helpers/api/buscarSinergia";
