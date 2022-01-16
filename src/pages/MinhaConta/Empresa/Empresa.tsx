@@ -60,7 +60,7 @@ function ProfileInput(props: any) {
     const data = Object.fromEntries(formData);
 
     const profile = await editProfile(data);
-    if (profile) alert("Perfil atualizado com sucesso!");
+    if (profile) e.target.reset();
   };
 
   return (

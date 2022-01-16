@@ -37,7 +37,6 @@ function Item(props: any) {
     const response = await excluirRota(props.id);
     if (response.status === 200) {
       props.refetch();
-      alert("Rota excluída com sucesso!");
     }
   };
 
