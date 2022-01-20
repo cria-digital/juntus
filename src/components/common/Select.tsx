@@ -19,6 +19,7 @@ interface IProps {
   options?: any[];
   multiple?: boolean;
   children?: any;
+  id?: string;
 }
 
 export default function Select(props: IProps) {

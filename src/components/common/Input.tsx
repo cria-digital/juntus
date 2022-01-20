@@ -1,4 +1,5 @@
 import { IInputProps } from "helpers/interfaces";
+import { useState } from "react";
 import { IconContext } from "react-icons/lib";
 import { MdFileUpload, MdSearch } from "react-icons/md";
 import InputMask from "react-input-mask";
@@ -9,6 +10,7 @@ const getIcon = (type: string) =>
 
 export default function Input(props: IInputProps) {
   const { type, value, error, width, disabled } = props;
+  const [isInvalid, setIsInvalid] = useState(false);
 
   const inputProps = {
     "data-value": !!value,
@@ -50,7 +52,14 @@ export default function Input(props: IInputProps) {
           {props.type === "textarea" ? (
             <textarea id={props.name} {...props}></textarea>
           ) : props.mask ? (
-            <InputMask id={props.name} {...props} />
+            <>
+              <InputMask
+                oninvalid={() => setIsInvalid(true)}
+                id={props.name}
+                {...props}
+              />
+              {isInvalid && <span>Invalido</span>}
+            </>
           ) : (
             <input id={props.name} {...props} />
           )}

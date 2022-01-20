@@ -1,4 +1,5 @@
 import Button from "components/common/Button";
+import CheckBox from "components/common/Checkbox";
 import Input from "components/common/Input";
 import Loading from "components/common/Loading";
 import Select from "components/common/Select";
@@ -141,14 +142,16 @@ export default function CadastrarNovaRota() {
         <div>
           <p>Carrocerias *</p>
           {carrocerias.map(({ nome, id }) => (
-            <div className="rota-checkbox" key={id}>
-              <input
+            <div style={{ margin: "10px 0px" }}>
+              <CheckBox
+                checked={data.carroceriasId.includes(id)}
                 id={nome}
                 type="checkbox"
-                checked={data.carroceriasId.includes(id)}
+                name={nome}
+                label={nome}
+                key={id}
                 onChange={() => handleCheckbox(id, "carroceriasId")}
               />
-              <label htmlFor={nome}>{nome}</label>
             </div>
           ))}
         </div>
@@ -156,14 +159,16 @@ export default function CadastrarNovaRota() {
         <div>
           <p>Veículos *</p>
           {veiculos.map(({ nome, id }) => (
-            <div key={id} className="rota-checkbox">
-              <input
+            <div style={{ margin: "10px 0px" }}>
+              <CheckBox
+                checked={data.veiculosId.includes(id)}
                 id={nome}
                 type="checkbox"
-                checked={data.veiculosId.includes(id)}
+                name={nome}
+                label={nome}
+                key={id}
                 onChange={() => handleCheckbox(id, "veiculosId")}
               />
-              <label htmlFor={nome}>{nome}</label>
             </div>
           ))}
         </div>

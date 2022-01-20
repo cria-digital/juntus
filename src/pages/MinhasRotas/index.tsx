@@ -1,8 +1,13 @@
 import SectionLayout from "components/layouts/SectionLayout";
+import { useLocation } from "react-router-dom";
 import CadastrarNovaRota from "./CadastrarRota";
 import MinhasRotas from "./MinhasRotas";
 
 export default function Rotas() {
+  const router = useLocation();
+
+  console.log(router);
+
   return (
     <div className="rotas">
       <SectionLayout

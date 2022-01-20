@@ -68,4 +68,6 @@ export interface IInputProps {
   name: string;
   maxLength?: number;
   mask?: string;
+  defaultValue?: string;
+  id?: string;
 }

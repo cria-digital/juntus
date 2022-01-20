@@ -342,3 +342,8 @@ code {
   font-size: 12pt !important;
   margin-left: 15px;
 }
+
+.check-col {
+  flex-direction: column;
+  gap: 10px;
+}

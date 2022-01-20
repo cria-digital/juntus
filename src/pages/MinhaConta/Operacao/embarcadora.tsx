@@ -1,3 +1,7 @@
+import CheckBox from "components/common/Checkbox";
+import { fetchServicos, fetchLicencas } from "helpers/api/sinergias";
+import { useEffect, useState } from "react";
+
 export const operacao = {
   inputs: [
     [
@@ -133,22 +137,42 @@ const checkboxes2 = [
   ["Transporte fracionado", "Transporte lotação", "Transportes com AET"],
 ];
 
+const Checkbox = (props) => {
+  const [isChecked, setChecked] = useState(false);
+
+  return (
+    <CheckBox
+      {...props}
+      onChange={() => setChecked((state) => !state)}
+      checked={isChecked}
+    />
+  );
+};
+
 export default function Checkboxes() {
+  const [licencas, setLicencas] = useState([]);
+  const [servicos, setServicos] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const licencasData = await fetchLicencas();
+      const servicosData = await fetchServicos();
+
+      setLicencas(licencasData);
+      setServicos(servicosData);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div>
       <div>
         <p>Licenças de transportes de cargas desejadas</p>
-        <div className="flex j-even">
-          {checkboxes1.map((col, index) => (
-            <div className="checkbox-container">
-              {col.map((item) => {
-                return (
-                  <div key={item}>
-                    <input type="checkbox" />
-                    <label>{item}</label>
-                  </div>
-                );
-              })}
+        <div className="flex j-even check-col">
+          {licencas.map((licenca, index) => (
+            <div key={licenca.id}>
+              <Checkbox label={licenca.nome} name={licenca.id} />
             </div>
           ))}
         </div>
@@ -156,17 +180,10 @@ export default function Checkboxes() {
 
       <div>
         <p>Serviços requeridos</p>
-        <div className="flex j-even">
-          {checkboxes2.map((col, index) => (
-            <div className="checkbox-container">
-              {col.map((item) => {
-                return (
-                  <div key={item}>
-                    <input type="checkbox" />
-                    <label>{item}</label>
-                  </div>
-                );
-              })}
+        <div className="flex j-even check-col">
+          {servicos.map((servico, index) => (
+            <div key={servico.id}>
+              <Checkbox label={servico.nome} name={servico.id} />
             </div>
           ))}
         </div>

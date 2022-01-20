@@ -14,10 +14,64 @@ import Swal from "sweetalert2";
 import Pagination from "components/hocs/Pagination";
 import BackButton from "components/common/BackButton";
 
+const contains = (arr1, arr2) => arr2.some((ai) => arr1.includes(ai));
+
 const MySwal = withReactContent(Swal);
+
+const initialState = {
+  veiculos: [],
+  carrocerias: [],
+  servicos: [],
+  volumes: [],
+};
 
 export default function Results({ inputs, results, date, setResults }) {
   const [filter, setFilter] = useState(false);
+  const [filters, setFilters] = useState(initialState);
+
+  console.log(inputs);
+
+  const changeSelectField = (newValue: any, name: string) => {
+    if (!newValue) return;
+
+    setFilters({
+      ...filters,
+      [name]: newValue.value,
+    });
+
+    return newValue;
+  };
+
+  const closeFilters = () => {
+    setFilters(initialState);
+    setFilter(false);
+  };
+
+  const customFilterFunction = (setFiltered, items) => {
+    if (!filter) return setFiltered(items);
+    const results = [];
+
+    for (let item of items) {
+      console.log("ITEM ", item);
+      if (
+        !item.veiculos ||
+        !item.carrocerias ||
+        !item.servicos ||
+        !item.volumes
+      )
+        continue;
+      if (
+        contains(filters.veiculos, item.veiculos) ||
+        contains(filters.carrocerias, item.carrocerias) ||
+        contains(filters.servicos, item.servicos) ||
+        contains(filters.volumes, item.volumes)
+      ) {
+        results.push(item);
+      }
+    }
+
+    setFiltered(results);
+  };
 
   return (
     <div className="page">
@@ -37,7 +91,11 @@ export default function Results({ inputs, results, date, setResults }) {
       </p>
 
       {filter ? (
-        <Filters inputs={inputs} setFilter={setFilter} />
+        <Filters
+          changeSelectField={changeSelectField}
+          inputs={inputs}
+          setFilters={closeFilters}
+        />
       ) : (
         <div className="buttons-container">
           <Button type="primary" onClick={() => setFilter(true)}>
@@ -56,6 +114,14 @@ export default function Results({ inputs, results, date, setResults }) {
       </IconContext.Provider>
 
       <Pagination
+        customFilterFunction={customFilterFunction}
+        customFilters={[
+          filters.carrocerias,
+          filters.servicos,
+          filters.veiculos,
+          filters.volumes,
+          filter,
+        ]}
         search={false}
         items={results}
         Component={BuscaCard}
@@ -67,10 +133,6 @@ export default function Results({ inputs, results, date, setResults }) {
       </div>
     </div>
   );
-}
-
-function Teste(props: any) {
-  return <div>{props.n}</div>;
 }
 
 function BuscaCard(props: any) {
@@ -141,7 +203,8 @@ function BuscaCard(props: any) {
   );
 }
 
-function Filters({ inputs, setFilter }) {
+function Filters({ inputs, setFilters, changeSelectField }) {
+  console.log(inputs);
   return (
     <>
       <div className="flex">
@@ -150,54 +213,49 @@ function Filters({ inputs, setFilter }) {
           placeholder="Selecione o(s) veículo(s)"
           label="Veículos"
           name="veiculos"
-        >
-          {inputs.veiculos.map((data: any) => (
-            <option key={data.id} value={data.id}>
-              {data.nome}
-            </option>
-          ))}
-        </Select>
+          onChange={(value: any) => changeSelectField(value, "veiculos")}
+          options={inputs.veiculos.map((data: any) => ({
+            id: data.id,
+            label: data.nome,
+          }))}
+        />
         <Select
           width="22%"
           placeholder="Selecione a(s) carroceria(s)"
           label="Carrocerias"
-          name="Carrocerias"
-        >
-          {inputs.carrocerias.map((data: any) => (
-            <option key={data.id} value={data.id}>
-              {data.nome}
-            </option>
-          ))}
-        </Select>
-
+          name="carrocerias"
+          onChange={(value: any) => changeSelectField(value, "carrocerias")}
+          options={inputs.carrocerias.map((data: any) => ({
+            id: data.id,
+            label: data.nome,
+          }))}
+        />
         <Select
           width="22%"
           placeholder="Selecione o(s) serviços"
           label="Serviços"
           name="servicos"
-        >
-          {inputs.servicos.map((data: any) => (
-            <option key={data.id} value={data.id}>
-              {data.nome}
-            </option>
-          ))}
-        </Select>
+          onChange={(value: any) => changeSelectField(value, "servicos")}
+          options={inputs.servicos.map((data: any) => ({
+            id: data.id,
+            label: data.nome,
+          }))}
+        />
 
         <Select
           width="22%"
           placeholder="Selecione uma ou mais licenças"
           label="Licenças"
           name="licencas"
-        >
-          {inputs.licencas.map((data: any) => (
-            <option key={data.id} value={data.id}>
-              {data.nome}
-            </option>
-          ))}
-        </Select>
+          onChange={(value: any) => changeSelectField(value, "licencas")}
+          options={inputs.licencas.map((data: any) => ({
+            id: data.id,
+            label: data.nome,
+          }))}
+        />
       </div>
       <div className="buttons-container">
-        <Button type="secondary" onClick={() => setFilter(false)}>
+        <Button type="secondary" onClick={() => setFilters(initialState)}>
           Limpar
         </Button>
       </div>

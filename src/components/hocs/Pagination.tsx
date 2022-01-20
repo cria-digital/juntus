@@ -8,7 +8,7 @@ export default function Pagination(props: any) {
   const [pageIndex, setPage] = useState(1);
   const [filterValue, setFilterValue] = useState("");
   const [filteredItems, setFilteredItems] = useState(props.items);
-  const { search = true, containerProps = {} } = props;
+  const { search = true, containerProps = {}, customFilters = [] } = props;
 
   useEffect(() => {
     const results = [];
@@ -24,6 +24,14 @@ export default function Pagination(props: any) {
 
     setFilteredItems(results);
   }, [filterValue, props.items]);
+
+  useEffect(() => {
+    console.log("TESTE");
+    if (props.customFilterFunction) {
+      props.customFilterFunction(setFilteredItems, props.items);
+      return;
+    }
+  }, customFilters);
 
   if (!props.items.length) return <Loading />;
 

@@ -21,6 +21,10 @@ export default function Convidados({ type }: { type: string }) {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
+  const handleCancel = () => {
+    setData(initialState);
+  };
+
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     const request = await sendRequest(data);
@@ -88,7 +92,9 @@ export default function Convidados({ type }: { type: string }) {
         </div>
 
         <div className="buttons-container">
-          <Button type="secondary">Cancelar</Button>
+          <Button type="secondary" onClick={handleCancel}>
+            Cancelar
+          </Button>
           <Button type="primary" submit>
             Cadastrar
           </Button>
