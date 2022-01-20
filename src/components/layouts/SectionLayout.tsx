@@ -1,5 +1,6 @@
 import Sections from "components/common/Sections";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 interface IProps {
   sections: {
@@ -14,9 +15,17 @@ export default function SectionLayout(props: IProps) {
     setSection(value);
   };
 
+  const location = useLocation();
+  console.log(location);
+
   useEffect(() => {
     setSection(props.sections[0].title);
   }, []);
+
+  useEffect(() => {
+    if (location.state && (location.state as any).section)
+      setSection((location.state as any).section);
+  }, [(location.state as any)?.section, location.key]);
 
   return (
     <>

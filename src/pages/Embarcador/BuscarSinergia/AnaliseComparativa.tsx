@@ -1,27 +1,33 @@
 import BackButton from "components/common/BackButton";
 import ProfileCard from "components/common/Cards/ProfileCard";
-
-const tableData = [
-  { name: "Veículos", value: "Carreta, bitruck, bitrem" },
-  { name: "Carrocerias", value: "Grade baixa, sider" },
-  { name: "Carro chefe", value: "Fracionado" },
-];
+import { useLocation } from "react-router-dom";
 
 export default function AnaliseComparativa() {
-  return (
-    <div className="page analise-comparativa">
-      <BackButton to="/">Voltar para resultados da busca</BackButton>
-      <div className="analise-list">
-        {[1, 2, 3].map((item) => (
-          <ProfileCard
-            key={item}
-            to={`/empresa/754`}
-            name="QB LOGÍSTICA"
-            big
-            tableData={tableData}
-          />
-        ))}
+  const location = useLocation();
+
+  if (location.state && (location.state as any).compararList)
+    return (
+      <div className="page analise-comparativa">
+        <BackButton to="/" state={{ state: { section: "Buscar Sinergia" } }}>
+          Voltar para resultados da busca
+        </BackButton>
+        <div className="analise-list">
+          {JSON.parse((location.state as any).compararList).map((item) => (
+            <ProfileCard
+              key={item}
+              to={`/empresa/${item.empresaId}`}
+              name={item.nomeEmpresa}
+              big
+              tableData={[
+                { name: "Veículos", value: item.veiculos.join(", ") },
+                { name: "Carrocerias", value: item.carrocerias.join(", ") },
+                { name: "Carro chefe", value: item.servicos[0] },
+              ]}
+            />
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+
+  return null;
 }

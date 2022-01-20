@@ -16,7 +16,7 @@ export default function Input(props: IInputProps) {
     "data-value": !!value,
     "data-error": error,
     "data-disabled": disabled,
-    style: { width: width || "100%" },
+    style: { width: width || "100%", marginLeft: props.left || "auto" },
   };
 
   return (

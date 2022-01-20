@@ -46,3 +46,8 @@ export const fetchVolumes = async () => {
   );
   return await response.json();
 };
+
+export const fetchApolices = async () => {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/tipoApolice`);
+  return await response.json();
+};

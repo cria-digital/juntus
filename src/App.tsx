@@ -44,9 +44,9 @@ function App() {
               <Route path="empresa/:id" element={<Profile />} />
               <Route
                 path="politica-de-seguranca"
-                element={<PoliticaDeSeguranca />}
+                element={<PoliticaDeSeguranca type={type} />}
               />
-              <Route path="termos-de-uso" element={<Termos />} />
+              <Route path="termos-de-uso" element={<Termos type={type} />} />
               <Route path="*" element={<h1>Not Found</h1>} />
             </Routes>
           </div>

@@ -2,28 +2,41 @@ import placeholderImg from "assets/placeholder.png";
 import Button from "components/common/Button";
 import InputCard from "components/common/Cards/InputCard";
 import Input from "components/common/Input";
+import Loading from "components/common/Loading";
 import { editProfile } from "helpers/api/profile";
-import { useState } from "react";
-import { empresa1, empresa2, empresa3 } from "./empresaInputs";
+import { useEffect, useState } from "react";
+import { getTransportadoraFields, empresa3, getFields } from "./empresaInputs";
 
 export default function Empresa(props: any) {
-  const [inputs, setInputs] = useState([
-    {
-      condition: props.type === "TRANSPORTADOR",
-      inputs: empresa1,
-      add: "",
-    },
-    {
-      condition: true,
-      inputs: empresa2,
-      add: "Adicionar mais unidades",
-    },
-    {
-      condition: true,
-      inputs: empresa3,
-      add: "Adicionar mais contatos",
-    },
-  ]);
+  const [inputs, setInputs] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const empresa1 = await getTransportadoraFields();
+      const empresa2 = await getFields();
+      setInputs([
+        {
+          condition: props.type === "TRANSPORTADOR",
+          inputs: empresa1,
+          add: "",
+        },
+        {
+          condition: true,
+          inputs: empresa2,
+          add: "Adicionar mais unidades",
+        },
+        {
+          condition: true,
+          inputs: empresa3,
+          add: "Adicionar mais contatos",
+        },
+      ]);
+    };
+
+    fetchData();
+  }, []);
+
+  if (!inputs.length) return <Loading />;
 
   return (
     <div className="page">
@@ -84,6 +97,14 @@ function ProfileImage() {
 }
 
 function ProfileInput(props: any) {
+  const [transportes, setTransportes] = useState();
+
+  useEffect(() => {
+    if (props.type === "TRANSPORTADOR") {
+      const fetchData = async () => {};
+    }
+  }, [props.type]);
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -188,6 +209,7 @@ function ProfileInput(props: any) {
             label="Tipo de transporte"
             name="tipo_transporte"
             placeholder="Selecione o tipo de transporte"
+            left="1.5%"
             required
           />
         </div>

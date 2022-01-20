@@ -20,6 +20,7 @@ interface IProps {
   multiple?: boolean;
   children?: any;
   id?: string;
+  defaultValue?: any;
 }
 
 export default function Select(props: IProps) {
@@ -31,6 +32,8 @@ export default function Select(props: IProps) {
     "data-disabled": disabled,
     style: { width: width || "100%" },
   };
+
+  console.log(props);
 
   return (
     <IconContext.Provider

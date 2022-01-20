@@ -1,4 +1,5 @@
 import Button from "components/common/Button";
+import BuscaCard from "components/common/Cards/BuscaCard";
 import CheckBox from "components/common/Checkbox";
 import Input from "components/common/Input";
 import Loading from "components/common/Loading";
@@ -7,6 +8,7 @@ import { fetchSinergia, saveFilter } from "helpers/api/buscarSinergia";
 import * as api from "helpers/api/sinergias";
 import { IFilter } from "helpers/interfaces";
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Results from "./Results";
 
 const initialState: IFilter = {
@@ -30,14 +32,35 @@ const initialState: IFilter = {
   nomeMunicipioDestino: "",
   siglaEstadoOrigem: "",
   siglaEstadoDestino: "",
+  matriz: "",
 };
+
+const getDefaultValue = (data) => ({
+  carroceriasId: data.carroceriaId,
+  ...data,
+});
 
 export default function BuscarSinergia() {
   const [save, setSave] = useState<boolean>(false);
-  const [data, setData] = useState<IFilter>(initialState);
+  const [compararList, setCompararList] = useState<any[]>([]);
   const [inputs, setInputs] = useState<any>({
     loading: true,
   });
+
+  const filterState = useRef(false);
+
+  const location = useLocation();
+
+  console.log("location", location);
+
+  if (location.state && (location.state as any).filter)
+    filterState.current = JSON.parse((location.state as any).filter);
+
+  const [data, setData] = useState<IFilter>(
+    typeof filterState.current === "object"
+      ? getDefaultValue(filterState.current)
+      : initialState
+  );
 
   const [results, setResults] = useState([]);
 
@@ -69,6 +92,8 @@ export default function BuscarSinergia() {
         faturamentos,
         funcionarios,
         volumes,
+        selos: [],
+        requisitos: [],
       });
     };
     fetchData();
@@ -127,6 +152,14 @@ export default function BuscarSinergia() {
 
   if (inputs.loading) return <Loading />;
 
+  const getDefaultValuesSelect = (property: string) => {
+    if (!data[property] || !data[property + "Id"]) return [];
+    return data[property + "Id"].map((item, i) => ({
+      label: data[property][i],
+      value: item,
+    }));
+  };
+
   if (results.length)
     return (
       <Results
@@ -134,6 +167,9 @@ export default function BuscarSinergia() {
         date={date.current}
         setResults={setResults}
         inputs={inputs}
+        setCompararList={setCompararList}
+        compararList={compararList}
+        Component={BuscaCard}
       />
     );
 
@@ -152,7 +188,7 @@ export default function BuscarSinergia() {
             type="text"
             label="Origem da carga"
             name="nomeMunicipioOrigem"
-            value={data.municipioOrigemId}
+            defaultValue={data.municipioOrigemId}
           />
           <Input
             onChange={changeField}
@@ -161,7 +197,7 @@ export default function BuscarSinergia() {
             type="text"
             label="Destino da carga"
             name="nomeMunicipioDestino"
-            value={data.municipioDestinoId}
+            defaultValue={data.municipioDestinoId}
           />
 
           <Select
@@ -172,6 +208,7 @@ export default function BuscarSinergia() {
             placeholder="Volume desejado"
             label="Volume de transporte"
             name="volumes"
+            defaultValue={getDefaultValuesSelect("volumes")}
           />
         </div>
 
@@ -186,6 +223,7 @@ export default function BuscarSinergia() {
             placeholder="Selecione o(s) veículo(s)"
             label="Veículos"
             name="veiculosId"
+            defaultValue={getDefaultValuesSelect("veiculos")}
           />
           <Select
             multiple
@@ -197,6 +235,7 @@ export default function BuscarSinergia() {
             placeholder="Selecione a(s) carroceria(s)"
             label="Carrocerias"
             name="carroceriasId"
+            defaultValue={getDefaultValuesSelect("carrocerias")}
           />
 
           <Select
@@ -209,6 +248,7 @@ export default function BuscarSinergia() {
             placeholder="Selecione o(s) serviços"
             label="Serviços"
             name="servicos"
+            defaultValue={getDefaultValuesSelect("servicos")}
           />
         </div>
 
@@ -220,6 +260,7 @@ export default function BuscarSinergia() {
             placeholder="Selecione o porte desejado"
             label="Porte da empresa"
             name="porte"
+            defaultValue={getDefaultValuesSelect("portes")}
           />
           <Select
             onChange={(value: any) => changeSelectField(value, "faturamentos")}
@@ -228,6 +269,7 @@ export default function BuscarSinergia() {
             placeholder="Selecione a faixa desejada"
             label="Faixa de faturamento"
             name="faixa_faturamento"
+            defaultValue={getDefaultValuesSelect("faturamentos")}
           />
           <Select
             onChange={(value: any) => changeSelectField(value, "funcionarios")}
@@ -236,6 +278,7 @@ export default function BuscarSinergia() {
             placeholder="Faixa de funcionários"
             label="Faixa de funcionarios"
             name="faixa_func"
+            defaultValue={getDefaultValuesSelect("funcionarios")}
           />
         </div>
 
@@ -250,6 +293,7 @@ export default function BuscarSinergia() {
             placeholder="Selecione uma ou mais licenças"
             label="Licenças"
             name="licencas"
+            defaultValue={getDefaultValuesSelect("licencas")}
           />
           <Select
             onChange={(value: any) => changeSelectField(value, "unidades")}
@@ -258,6 +302,7 @@ export default function BuscarSinergia() {
             placeholder="Selecione a unidade desejada"
             label="Tipo de Unidade"
             name="tipo_unidade"
+            defaultValue={getDefaultValuesSelect("unidades")}
           />
           <Input
             onChange={changeField}
@@ -266,6 +311,7 @@ export default function BuscarSinergia() {
             type="text"
             label="Matriz/Filial"
             name="matriz"
+            defaultValue={data.matriz}
           />
         </div>
 

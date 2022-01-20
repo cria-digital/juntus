@@ -1,9 +1,14 @@
+import BackButton from "components/common/BackButton";
 import SectionLayout from "components/layouts/SectionLayout";
 import { PoliticaDeSeguranca } from "texts";
 
-export default function Seguranca() {
+export default function Seguranca({ type }: { type: string }) {
   return (
     <div className="page">
+      <BackButton to="/">
+        Voltar para{" "}
+        {type === "EMBARCADOR" ? "busca de sinergia" : "atualizações"}
+      </BackButton>
       <SectionLayout
         sections={[{ title: "POLÍTICA DE PRIVACIDADE E SEGURANÇA" }]}
         render={{

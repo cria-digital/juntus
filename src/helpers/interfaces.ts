@@ -33,6 +33,7 @@ export interface IFilter {
   carrocerias: string[];
   servicos: string[];
   volumes: number[];
+  matriz?: string;
 }
 
 export interface IUserData {
@@ -68,6 +69,7 @@ export interface IInputProps {
   name: string;
   maxLength?: number;
   mask?: string;
-  defaultValue?: string;
+  defaultValue?: string | number;
   id?: string;
+  left?: string;
 }

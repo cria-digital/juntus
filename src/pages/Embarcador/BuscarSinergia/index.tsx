@@ -1,6 +1,6 @@
 import Card from "components/common/Cards/Card";
 import Ratings from "components/common/Rating";
-import Pagination from "components/hocs/Pagination";
+import * as api from "helpers/api/sinergias";
 import SectionLayout from "components/layouts/SectionLayout";
 import { fetchBuscas } from "helpers/api/buscarSinergia";
 import { useEffect, useState } from "react";
@@ -8,6 +8,8 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import AnaliseComparativa from "./AnaliseComparativa";
 import BuscarSinergia from "./BuscarSinergia";
+import Results from "./Results";
+import Loading from "components/common/Loading";
 
 export default function BuscarSinergias() {
   return (
@@ -36,30 +38,41 @@ export default function BuscarSinergias() {
 
 function BuscasSalvas() {
   const [buscas, setBuscas] = useState([]);
+  const [inputs, setInputs] = useState<any>({
+    loading: true,
+  });
 
   useEffect(() => {
     const fetchData = async () => {
       const results = await fetchBuscas();
       setBuscas(results);
+
+      const veiculos = await api.fetchVeiculos();
+      const carrocerias = await api.fetchCarrocerias();
+      const servicos = await api.fetchServicos();
+      const licencas = await api.fetchLicencas();
+      const volumes = await api.fetchVolumes();
+
+      setInputs({
+        veiculos,
+        carrocerias,
+        servicos,
+        licencas,
+        volumes,
+        selos: [],
+        requisitos: [],
+      });
     };
 
     fetchData();
   }, []);
 
-  return (
-    <div className="page">
-      <p> Consulte aqui seus filtros customizados de busca de sinergia </p>
-      <Pagination
-        limit={5}
-        search={false}
-        items={buscas}
-        Component={BuscaCard}
-      />
-    </div>
-  );
+  if (inputs.loading) return <Loading />;
+  console.log(inputs);
+  return <Results results={buscas} inputs={inputs} Component={FilterCard} />;
 }
 
-function BuscaCard(props) {
+function FilterCard(props) {
   const {
     nomeMunicipioOrigem,
     siglaEstadoOrigem,
@@ -71,7 +84,10 @@ function BuscaCard(props) {
 
   const handleClick = () => {
     navigate("/", {
-      state: { filter: props },
+      state: {
+        section: "Buscar Sinergia",
+        filter: JSON.stringify(props),
+      },
     });
   };
 
@@ -87,7 +103,7 @@ function BuscaCard(props) {
           <BsFillBookmarkFill />
         </div>
       </div>
-      <div onClick={handleClick}>
+      <div className="cursor-pointer" onClick={handleClick}>
         <h3>{`${nomeMunicipioOrigem}, ${siglaEstadoOrigem} > ${nomeMunicipioDestino}, ${siglaEstadoDestino}`}</h3>
         <Ratings rating={4} />
         <p>

@@ -74,6 +74,8 @@ export default function CadastrarNovaRota() {
       ...data,
       transportesMes: newValue.value,
     });
+
+    return newValue;
   };
 
   const handleSubmit = async (e: any) => {
@@ -135,7 +137,10 @@ export default function CadastrarNovaRota() {
             placeholder="Selecione a faixa"
             onChange={changeSelectField}
             required
-            options={transportesMes.map((i) => ({ id: i.id, label: i.nome }))}
+            options={transportesMes.map((i) => ({
+              value: i.id,
+              label: i.nome,
+            }))}
           ></Select>
         </div>
 

@@ -1,6 +1,13 @@
 import InputCard from "components/common/Cards/InputCard";
-import Checkboxes, { operacao } from "./embarcadora";
-import { operacao1, operacao2, operacao3, operacao4 } from "./transportadora";
+import Loading from "components/common/Loading";
+import { useEffect, useState } from "react";
+import Checkboxes, { getOperation } from "./embarcadora";
+import {
+  operacao1,
+  getFields1,
+  getFields2,
+  getFields3,
+} from "./transportadora";
 
 const operacaoCheckboxes = {
   inputs: [],
@@ -19,22 +26,79 @@ const operacaoCheckboxes = {
 };
 
 export default function Operacao(props: any) {
-  if (props.type === "EMBARCADOR")
+  const [operacao, setOperacao] = useState<any>(false);
+  const [transportadora, setTransportadora] = useState<any>(false);
+
+  useEffect(() => {
+    if (props.type === "EMBARCADOR") {
+      const fetchData = async () => {
+        const result = await getOperation();
+
+        setOperacao(result);
+      };
+
+      fetchData();
+    } else {
+      const fetchData = async () => {
+        const operacao2 = await getFields1();
+        const operacao3 = await getFields2();
+        const operacao4 = await getFields3();
+
+        const result = [
+          {
+            data: operacao1,
+            add: "Adicionar mais clientes",
+          },
+          {
+            data: operacao2,
+            add: "Adicionar mais veículos",
+          },
+          {
+            data: operacao3,
+            add: "Adicionar mais carrocerias",
+          },
+          {
+            data: operacao4,
+            add: false,
+          },
+        ];
+
+        console.log(result);
+
+        setTransportadora(result);
+      };
+
+      fetchData();
+    }
+  }, [props.type]);
+
+  if (props.type === "EMBARCADOR") {
+    if (!operacao) return <Loading />;
     return (
       <InputCard noChildren {...operacao}>
         <Checkboxes />
       </InputCard>
     );
-  else
-    return (
-      <div className="page">
-        <InputCard {...operacao1} />
-        <InputCard {...operacao2} />
-        <InputCard {...operacao3} />
-        <InputCard noChildren {...operacaoCheckboxes}>
-          <Checkboxes />
-        </InputCard>
-        <InputCard {...operacao4} />
-      </div>
-    );
+  }
+
+  if (!transportadora) return <Loading />;
+
+  return (
+    <div className="page">
+      {transportadora.map((operacao, i) => {
+        return (
+          <InputCard
+            key={i}
+            setInputs={setTransportadora}
+            add={operacao.add}
+            item={operacao}
+            {...operacao.data}
+          />
+        );
+      })}
+      <InputCard noChildren {...operacaoCheckboxes}>
+        <Checkboxes />
+      </InputCard>
+    </div>
+  );
 }

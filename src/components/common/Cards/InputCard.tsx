@@ -1,6 +1,7 @@
 import { IButtonProps, IInputProps } from "helpers/interfaces";
 import Button from "../Button";
 import Input from "../Input";
+import Select from "../Select";
 import Card from "./Card";
 
 interface IProps {
@@ -33,9 +34,13 @@ export default function InputCard(props: IProps) {
       <div>
         {props.inputs.map((inputs, index) => (
           <div key={index} className="flex">
-            {inputs.map((input: IInputProps) => (
-              <Input key={input.name} {...input} />
-            ))}
+            {inputs.map((input: any) =>
+              input.select ? (
+                <Select key={input.name} {...input} />
+              ) : (
+                <Input key={input.name} {...input} />
+              )
+            )}
           </div>
         ))}
 
