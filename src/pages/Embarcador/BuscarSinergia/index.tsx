@@ -4,6 +4,8 @@ import Pagination from "components/hocs/Pagination";
 import SectionLayout from "components/layouts/SectionLayout";
 import { fetchBuscas } from "helpers/api/buscarSinergia";
 import { useEffect, useState } from "react";
+import { BsFillBookmarkFill } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 import AnaliseComparativa from "./AnaliseComparativa";
 import BuscarSinergia from "./BuscarSinergia";
 
@@ -31,14 +33,6 @@ export default function BuscarSinergias() {
     </div>
   );
 }
-
-const busca = {
-  title: "BELO HORIZONTE, MG > SÃO PAULO, SP",
-  rating: 4.5,
-  veiculos: "Bitrem, Bitruck, Carreta, e mais 4",
-  carrocerias: "Baú, Caçamba, Cegonheiro",
-  tags: ["ISO 9001", "Certificado Registro Exército", "Rastreador"],
-};
 
 function BuscasSalvas() {
   const [buscas, setBuscas] = useState([]);
@@ -73,9 +67,27 @@ function BuscaCard(props) {
     siglaEstadoDestino,
   } = props;
 
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/", {
+      state: { filter: props },
+    });
+  };
+
+  const addToRede = (e: any) => {
+    e.preventDefault();
+    console.log("teste");
+  };
+
   return (
     <Card className="busca-card">
-      <div>
+      <div className="sinergia-icon">
+        <div onClick={addToRede}>
+          <BsFillBookmarkFill />
+        </div>
+      </div>
+      <div onClick={handleClick}>
         <h3>{`${nomeMunicipioOrigem}, ${siglaEstadoOrigem} > ${nomeMunicipioDestino}, ${siglaEstadoDestino}`}</h3>
         <Ratings rating={4} />
         <p>

@@ -1,6 +1,7 @@
 import { IInputProps } from "helpers/interfaces";
 import { IconContext } from "react-icons/lib";
 import { MdFileUpload, MdSearch } from "react-icons/md";
+import InputMask from "react-input-mask";
 import styles from "styles/components/Input.module.scss";
 
 const getIcon = (type: string) =>
@@ -48,6 +49,8 @@ export default function Input(props: IInputProps) {
           )}
           {props.type === "textarea" ? (
             <textarea id={props.name} {...props}></textarea>
+          ) : props.mask ? (
+            <InputMask id={props.name} {...props} />
           ) : (
             <input id={props.name} {...props} />
           )}

@@ -73,7 +73,7 @@ export default function Register() {
   if (state.success) return <RegisterComplete />;
 
   return (
-    <AuthLayout>
+    <AuthLayout steps={state.section}>
       <div style={{ width: "90%", margin: "auto" }}>
         <form className="register" onSubmit={handleRegister}>
           <div

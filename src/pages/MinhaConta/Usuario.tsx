@@ -3,6 +3,10 @@ import Usuarios from "components/common/Usuarios";
 import Input from "components/common/Input";
 import React, { useState } from "react";
 import { IUserData } from "helpers/interfaces";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+
+const MySwal = withReactContent(Swal);
 
 export default function Usuario(props: any) {
   const [userData, setUserData] = useState<IUserData>({
@@ -19,8 +23,29 @@ export default function Usuario(props: any) {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    await MySwal.fire({
+      title: <h3>SEU CONVITE FOI ENVIADO!</h3>,
+      html: (
+        <p>
+          O transportador indicado receberá um e-mail para se cadastrar na
+          JuntUs.
+        </p>
+      ),
+      showCloseButton: true,
+    });
+  };
+
+  const handlePasswordReset = async (e: any) => {
+    await MySwal.fire({
+      title: <h3>ALTERAR SENHA</h3>,
+      showCloseButton: true,
+      html: (
+        <p>Foi enviado um e-mail com o procedimento para alteração de senha.</p>
+      ),
+    });
   };
 
   return (
@@ -47,7 +72,7 @@ export default function Usuario(props: any) {
             name="email"
             placeholder="Digite seu e-mail de trabalho"
             onChange={changeField}
-            required
+            disabled
           />
         </div>
         <div style={{ display: "flex" }}>
@@ -65,14 +90,28 @@ export default function Usuario(props: any) {
             type="text"
             label="Telefone"
             name="telefone"
+            mask="(99) 99999-9999"
             placeholder="(31) 99999-9999"
             onChange={changeField}
             required
           />
         </div>
 
-        <div className="buttons-container">
-          <Button type="primary">Cadastrar</Button>
+        <p
+          style={{
+            margin: "10px 0 0 0",
+            cursor: "pointer",
+            color: "var(--JuntUs-Orange)",
+          }}
+          onClick={handlePasswordReset}
+        >
+          Resetar senha
+        </p>
+
+        <div className="buttons-container" style={{ marginTop: 0 }}>
+          <Button type="primary" submit>
+            Salvar
+          </Button>
         </div>
       </form>
 

@@ -3,6 +3,10 @@ import Input from "components/common/Input";
 import Usuarios from "components/common/Usuarios";
 import { sendRequest } from "helpers/api/rede";
 import React, { useState } from "react";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const mySwal = withReactContent(Swal);
 
 const initialState = {
   email: "",
@@ -20,7 +24,19 @@ export default function Convidados({ type }: { type: string }) {
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     const request = await sendRequest(data);
-    if (request) setData(initialState);
+    if (request) {
+      setData(initialState);
+      await mySwal.fire({
+        title: <h3>SEU CONVITE FOI ENVIADO!</h3>,
+        html: (
+          <p>
+            O transportador indicado receberá um e-mail para se cadastrar na
+            JuntUs.
+          </p>
+        ),
+        showCloseButton: true,
+      });
+    }
   };
 
   return (
@@ -63,8 +79,9 @@ export default function Convidados({ type }: { type: string }) {
             type="text"
             label="CNPJ"
             name="cnpj"
-            placeholder="Digite a região de Origem"
+            placeholder="CNPJ"
             onChange={changeField}
+            mask="99.999.999/9999-99"
             required
             value={data.cnpj}
           />

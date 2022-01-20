@@ -15,6 +15,7 @@
     position: fixed;
     transition: all 200ms ease-in-out;
     z-index: 10;
+    border-right: 1px solid #7f7f7f;
 }
 
 .sidebar_container ~ div {
@@ -84,7 +85,6 @@
 
     &[data-active="true"] {
         background-color: var(--JuntUs-Blue);
-        border-right: 0.5rem solid var(--JuntUs-Blue);
         color: var(--Gray15);
         box-shadow: 0px 12px 12px #E5E5E5;
 

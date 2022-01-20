@@ -1,11 +1,12 @@
 import Button from "components/common/Button";
+import CheckBox from "components/common/Checkbox";
 import Input from "components/common/Input";
 import Loading from "components/common/Loading";
 import Select from "components/common/Select";
 import { fetchSinergia, saveFilter } from "helpers/api/buscarSinergia";
 import * as api from "helpers/api/sinergias";
 import { IFilter } from "helpers/interfaces";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Results from "./Results";
 
 const initialState: IFilter = {
@@ -40,6 +41,12 @@ export default function BuscarSinergia() {
 
   const [results, setResults] = useState([]);
 
+  const date = useRef({
+    start: new Date().getTime(),
+    end: null,
+    total: 0,
+  });
+
   useEffect(() => {
     const fetchData = async () => {
       const veiculos = await api.fetchVeiculos();
@@ -73,12 +80,17 @@ export default function BuscarSinergia() {
   };
 
   const handleSubmit = async (e: any) => {
+    date.current.start = new Date().getTime();
+
     e.preventDefault();
     if (save) {
       await saveFilter(data);
     }
 
     const results = await fetchSinergia(data);
+    date.current.end = new Date().getTime();
+
+    date.current.total = (date.current.end - date.current.start) / 1000;
 
     setResults(results);
   };
@@ -115,7 +127,15 @@ export default function BuscarSinergia() {
 
   if (inputs.loading) return <Loading />;
 
-  if (results.length) return <Results results={results} inputs={inputs} />;
+  if (results.length)
+    return (
+      <Results
+        results={results}
+        date={date.current}
+        setResults={setResults}
+        inputs={inputs}
+      />
+    );
 
   return (
     <div className="page">
@@ -214,12 +234,12 @@ export default function BuscarSinergia() {
             options={getOptions(inputs.funcionarios)}
             width="30%"
             placeholder="Faixa de funcionários"
-            label="Selecione a faixa desejada"
+            label="Faixa de funcionarios"
             name="faixa_func"
           />
         </div>
 
-        <div className="flex">
+        <div className="flex" style={{ marginBottom: 25 }}>
           <Select
             multiple
             onChange={(value: any) =>
@@ -249,15 +269,12 @@ export default function BuscarSinergia() {
           />
         </div>
 
-        <div style={{ marginTop: 25 }}>
-          <input
-            checked={save}
-            onChange={() => setSave(!save)}
-            id="salvar"
-            type="checkbox"
-          />
-          <label htmlFor="salvar">Salvar filtro de Busca</label>
-        </div>
+        <CheckBox
+          checked={save}
+          onChange={() => setSave(!save)}
+          name="salvar"
+          label="Salvar filtro de Busca"
+        />
 
         <div className="buttons-container">
           <Button type="secondary" onClick={cleanFilter}>

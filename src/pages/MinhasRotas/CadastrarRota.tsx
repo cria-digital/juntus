@@ -1,12 +1,18 @@
 import Button from "components/common/Button";
 import Input from "components/common/Input";
+import Loading from "components/common/Loading";
 import Select from "components/common/Select";
 import {
   cadastrarRota,
   fetchCarrocerias,
   fetchVeiculos,
 } from "helpers/api/rotas";
+import { fetchVolumes } from "helpers/api/sinergias";
 import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const mySwal = withReactContent(Swal);
 
 const options = Array.from(Array(10).keys()).map((i) => ({
   id: i + 1,
@@ -16,6 +22,7 @@ const options = Array.from(Array(10).keys()).map((i) => ({
 export default function CadastrarNovaRota() {
   const [veiculos, setVeiculos] = useState([]);
   const [carrocerias, setCarrocerias] = useState([]);
+  const [transportesMes, setTransportesMes] = useState([]);
 
   const [data, setData] = useState({
     carroceriasId: [],
@@ -30,10 +37,15 @@ export default function CadastrarNovaRota() {
 
       const carroceriasData = await fetchCarrocerias();
       setCarrocerias(carroceriasData);
+
+      const volumesData = await fetchVolumes();
+      setTransportesMes(volumesData);
     };
 
     fetchData();
   }, []);
+
+  console.log(transportesMes);
 
   const handleCheckbox = (id: number, target: string) => {
     if (!data[target].includes(id)) {
@@ -67,9 +79,25 @@ export default function CadastrarNovaRota() {
     e.preventDefault();
     const result = await cadastrarRota(data);
 
-    if (result && e.target.reset) e.target.reset();
-    else alert("Erro ao cadastrar rota");
+    if (result && e.target.reset) {
+      mySwal.fire({
+        title: <h3>ROTA CADASTRADA</h3>,
+        html: (
+          <p> A rota informada foi cadastrada com sucesso em seu perfil! </p>
+        ),
+        showCloseButton: true,
+      });
+      e.target.reset();
+    } else
+      mySwal.fire({
+        title: <h3>ERRO AO CADASTRAR</h3>,
+        html: <p> "Tente novamente mais tarde"</p>,
+        showCloseButton: true,
+      });
   };
+
+  if (!veiculos.length || !carrocerias.length || !transportesMes.length)
+    return <Loading />;
 
   return (
     <div className="cadastrar-nova-rota">
@@ -106,7 +134,7 @@ export default function CadastrarNovaRota() {
             placeholder="Selecione a faixa"
             onChange={changeSelectField}
             required
-            options={options}
+            options={transportesMes.map((i) => ({ id: i.id, label: i.nome }))}
           ></Select>
         </div>
 

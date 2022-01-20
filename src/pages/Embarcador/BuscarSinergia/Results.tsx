@@ -1,15 +1,37 @@
 import placeholderImg from "assets/placeholder.png";
 import Button from "components/common/Button";
 import Card from "components/common/Cards/Card";
+import CheckBox from "components/common/Checkbox";
 import Ratings from "components/common/Rating";
 import Select from "components/common/Select";
 import { useState } from "react";
+import { IoShareSocialSharp } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
+import { HiInformationCircle } from "react-icons/hi";
+import { IconContext } from "react-icons/lib";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+import Pagination from "components/hocs/Pagination";
+import BackButton from "components/common/BackButton";
 
-export default function Results({ inputs, results }) {
+const MySwal = withReactContent(Swal);
+
+export default function Results({ inputs, results, date, setResults }) {
   const [filter, setFilter] = useState(false);
+
   return (
     <div className="page">
-      <p>5 transportadores encontrados (0,56 segundos)</p>
+      <BackButton
+        onClick={() => {
+          setResults([]);
+        }}
+      >
+        Voltar para busca de sinergia
+      </BackButton>
+      <p>
+        {results.length} transportadores encontrados ({date.total.toFixed(2)}{" "}
+        segundos)
+      </p>
       <p>
         Filtre a busca por transportadores de acordo com os critérios desejados.{" "}
       </p>
@@ -24,19 +46,70 @@ export default function Results({ inputs, results }) {
         </div>
       )}
 
-      {results.map((item) => (
-        <BuscaCard key={item.empresaId} {...item} />
-      ))}
+      <IconContext.Provider value={{ color: "var(--JuntUs-Blue)", size: "19" }}>
+        <h4 style={{ fontWeight: 500 }}>
+          Comparar{" "}
+          <span className="comparar">
+            <HiInformationCircle />
+          </span>
+        </h4>
+      </IconContext.Provider>
+
+      <Pagination
+        search={false}
+        items={results}
+        Component={BuscaCard}
+        limit={5}
+      />
+
+      <div className="buttons-container">
+        <Button type="primary">Comparar</Button>
+      </div>
     </div>
   );
 }
 
+function Teste(props: any) {
+  return <div>{props.n}</div>;
+}
+
 function BuscaCard(props: any) {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/empresa/${props.empresaId}`);
+  };
+
+  const addToRede = async (e: any) => {
+    e.preventDefault();
+    console.log("teste");
+    await MySwal.fire({
+      title: <h3>CONVITE ENVIADO</h3>,
+      showCloseButton: true,
+      html: (
+        <p>
+          O transportador QB Logística recebeu a solicitação para fazer parte da
+          sua rede
+        </p>
+      ),
+    });
+  };
+
   return (
     <div className="flex" style={{ alignItems: "center" }}>
-      <input type="checkbox" style={{ width: 30, height: 30 }} />
-      <Card className="busca-card">
-        <div className="flex">
+      <CheckBox
+        checked={isChecked}
+        onChange={() => setIsChecked((state) => !state)}
+      />
+      <Card className="busca-card cursor-pointer">
+        <div className="sinergia-icon">
+          <div onClick={addToRede}>
+            <IoShareSocialSharp />
+          </div>
+        </div>
+        <div onClick={handleClick} className="flex">
           <img
             src={placeholderImg}
             height="80"

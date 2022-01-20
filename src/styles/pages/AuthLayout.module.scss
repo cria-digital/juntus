@@ -1,7 +1,8 @@
 $form-container-bshadow: 0px 4px 4px #000000;
 
 .container {
-    background-color: var(--Black);
+    background-image: url("../../assets/background.png");
+    background-size: cover;
     min-width: 100vw;
     min-height: 100vh;
     display: flex;
@@ -20,6 +21,9 @@ $form-container-bshadow: 0px 4px 4px #000000;
     margin: auto;
     background:  var(--Gray15);
     box-shadow: $form-container-bshadow;
+    display: flex;
+    flex-direction: column;
+    justify-content: scpace-between;
 }
 
 .logo_container {
@@ -31,3 +35,23 @@ $form-container-bshadow: 0px 4px 4px #000000;
     }
 }
     
+.steps {
+    height: 10px;
+    width: 700px;
+    margin-bottom: -5px;
+    border-radius: 0px 0px 8px 8px;
+
+    transition: all 200ms;
+
+    &[data-steps="0"] {
+        background: linear-gradient(to right, #CC671F 0% 40%, #ecc9af 40% 75%, #f1d8c6  75% 100%);
+    }
+    
+    &[data-steps="1"] {
+        background: linear-gradient(to right, #CC671F 0% 25%, var(--JuntUs-DarkOrange-02) 25% 75%, #f1d8c6  75% 100%);
+    }
+
+    &[data-steps="2"] {
+        background: linear-gradient(to right, var(--JuntUs-DarkOrange-01) 0% 25%, var(--JuntUs-DarkOrange-02) 25% 50%, var(--JuntUs-DarkOrange-03)  50% 100%);
+    }
+}

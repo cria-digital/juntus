@@ -67,4 +67,5 @@ export interface IInputProps {
   height?: string;
   name: string;
   maxLength?: number;
+  mask?: string;
 }

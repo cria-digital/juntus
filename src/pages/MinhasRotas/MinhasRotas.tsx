@@ -5,6 +5,10 @@ import { IconContext } from "react-icons/lib";
 import Button from "components/common/Button";
 import { useEffect, useState } from "react";
 import { excluirRota, fetchRotas } from "helpers/api/rotas";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+
+const mySwal = withReactContent(Swal);
 
 export default function MinhasRotas() {
   const [rotas, setRotas] = useState([]);
@@ -20,6 +24,7 @@ export default function MinhasRotas() {
 
   return (
     <Pagination
+      download
       limit={4}
       Component={Item}
       itemProps={{ refetch: fetchData }}
@@ -34,10 +39,21 @@ function Item(props: any) {
     props;
 
   const deleteRota = async () => {
-    const response = await excluirRota(props.id);
-    if (response.status === 200) {
-      props.refetch();
-    }
+    mySwal
+      .fire({
+        title: <h3>EXCLUIR</h3>,
+        html: <p>Você tem certeza que deseja excluir essa rota?</p>,
+        showCloseButton: true,
+        confirmButtonText: "SIM",
+      })
+      .then(async (result) => {
+        if (result) {
+          const response = await excluirRota(props.id);
+          if (response.status === 200) {
+            props.refetch();
+          }
+        }
+      });
   };
 
   return (

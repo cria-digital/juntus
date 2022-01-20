@@ -192,3 +192,153 @@ code {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  font-weight: 700 !important;
+}
+
+.checkbox-container > div {
+  border: 2px solid #367CB3;
+  border-radius: 3px;
+  height: 18px;
+  width: 18px;
+  margin-right: 10px;
+  color: white;
+  transition: background-color 100ms;
+}
+
+.checkbox-container > div[data-checked="true"] {
+  background-color: #367CB3;
+}
+
+.checkbox-container input {
+  opacity: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.sinergia-icon {
+  display: flex;
+  justify-content: flex-end;
+  max-height: 30px;
+  padding-top: 30px;
+  min-height: 30px !important;
+
+
+  font-size: 25pt;
+  color: var(--JuntUs-Blue);
+
+}
+
+.sinergia-icon > div {
+  z-index: 5;
+  height: 30px;
+  cursor: pointer;
+}
+
+.comparar:hover {
+  cursor: pointer;
+}
+
+.comparar:after {
+  content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In varius augue ut magna mattis dictum.";
+  width: fit-content;
+  height: 50px;
+  padding: 10px 2px;
+  background-color: var(--White);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  position: relative;
+
+  bottom: 25px;
+  display: none;
+}
+
+.comparar:hover::after {
+  display: unset;
+  animation: appear 200ms;
+}
+
+.pagination-buttons {
+  width: fit-content;
+  margin: auto;
+  display: flex;
+  gap: 16px;
+  margin-top: 25px;
+}
+
+.pagination-buttons button {
+  color: var(--Gray70);
+  width: 40px;
+  height: 40px;
+
+  background: var(--White);
+
+  border: 1px solid var(--Gray35);
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-weight: bolder;
+}
+
+.pagination-buttons button:disabled {
+  opacity: 0.6;
+}
+
+.pagination-buttons button:not(:disabled) {
+  cursor: pointer;
+}
+
+.pagination-buttons button.active {
+  border: 1px solid var(--JuntUs-Red);
+}
+
+.swal2-title {
+  padding-top: 10px !important;
+  text-align: left !important;
+}
+
+.swal2-close, .swal2-close:hover {
+  transform: translateY(10px) !important;
+  width: 80px !important;
+  font-size: 3rem !important;
+  opacity: 0.5;
+}
+
+.swal2-html-container {
+  margin-top: 0px !important;
+  border-top: 1px solid var(--Gray35);
+  text-align: left !important;
+  font-family: Open Sans !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-size: 16px !important;
+  line-height: 30px !important;
+
+  color: var(--Gray90) !important;
+}
+
+.swal2-actions {
+  margin-left: auto;
+  margin-right: 32px;
+}
+
+.swal2-actions button {
+  min-width: 140px;
+  background-color: var(--JuntUs-Blue) !important;
+}
+
+.back-button {
+  position: absolute;
+  top: 5%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+}
+
+.back-button span {
+  font-size: 12pt !important;
+  margin-left: 15px;
+}

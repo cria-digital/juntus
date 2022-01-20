@@ -7,7 +7,6 @@ export const operacao1 = {
         placeholder: "Informe o nome da empresa",
         type: "text",
         width: "45%",
-        required: true,
       },
       {
         name: "contato",
@@ -15,7 +14,6 @@ export const operacao1 = {
         placeholder: "Informe o nome do contato na empresa",
         type: "text",
         width: "45%",
-        required: true,
       },
     ],
     [
@@ -25,7 +23,6 @@ export const operacao1 = {
         placeholder: "Informe o e-mail do contato na empresa ",
         type: "email",
         width: "45%",
-        required: true,
       },
       {
         name: "telefone",
@@ -33,7 +30,6 @@ export const operacao1 = {
         placeholder: "(31) 0000-0000",
         type: "text",
         width: "45%",
-        required: true,
       },
     ],
     [
@@ -43,7 +39,6 @@ export const operacao1 = {
         placeholder: "Informe o tempo de contrato em anos",
         type: "number",
         width: "45%",
-        required: true,
       },
     ],
   ],
@@ -70,7 +65,6 @@ export const operacao2 = {
         placeholder: "O veículo desejado",
         type: "text",
         width: "45%",
-        required: true,
       },
       {
         name: "quantidade",
@@ -78,7 +72,6 @@ export const operacao2 = {
         placeholder: "Selecione a quantidade desejada",
         type: "text",
         width: "45%",
-        required: true,
       },
     ],
   ],
@@ -105,7 +98,6 @@ export const operacao3 = {
         placeholder: "Selecione a carroceria desejada",
         type: "text",
         width: "45%",
-        required: true,
       },
       {
         name: "quantidade",
@@ -113,7 +105,6 @@ export const operacao3 = {
         placeholder: "Selecione a quantidade desejada",
         type: "text",
         width: "45%",
-        required: true,
       },
     ],
   ],
@@ -140,7 +131,6 @@ export const operacao4 = {
         placeholder: "Selecione o tipo de unidade",
         type: "text",
         width: "45%",
-        required: true,
       },
       {
         name: "apolice",
@@ -148,7 +138,6 @@ export const operacao4 = {
         placeholder: "30000-000",
         type: "text",
         width: "45%",
-        required: true,
       },
     ],
     [
@@ -158,7 +147,6 @@ export const operacao4 = {
         placeholder: "01/01/1900",
         type: "text",
         width: "45%",
-        required: true,
       },
       {
         name: "dataInicio",
@@ -166,7 +154,6 @@ export const operacao4 = {
         placeholder: "01/12/1900",
         type: "text",
         width: "45%",
-        required: true,
       },
     ],
     [
@@ -176,7 +163,6 @@ export const operacao4 = {
         placeholder: "Informe o limite de cobertura do seguro",
         type: "number",
         width: "45%",
-        required: true,
       },
       {
         name: "tipoApolice",
@@ -184,7 +170,6 @@ export const operacao4 = {
         placeholder: "Selecione o tipo de apólice",
         type: "number",
         width: "45%",
-        required: true,
       },
     ],
   ],

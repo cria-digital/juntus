@@ -144,8 +144,7 @@ $error-label-color: #D9342B;
     outline: none !important;
     background-color: transparent !important;
     box-shadow: none !important;
-    overflow: hidden;
-    max-height: 40px;
+    // max-height: 40px;
 }
 
 .selectMultiple div[class*="IndicatorsContainer"] {
@@ -153,6 +152,17 @@ $error-label-color: #D9342B;
 }
 
 .selectMultiple div[class*="multiValue"] {
-    height: 30px
-    ;
+    height: 30px;
+    & > div {
+        padding-top: 0;
+    }
+}
+
+.selectMultiple div[class*="indicatorSeparator"] {
+    height: 100%;
+}
+
+.selectMultiple div[class*="placeholder"] {
+    overflow: hidden;
+    white-space: nowrap;
 }

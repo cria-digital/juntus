@@ -3,17 +3,46 @@ import Button from "components/common/Button";
 import InputCard from "components/common/Cards/InputCard";
 import Input from "components/common/Input";
 import { editProfile } from "helpers/api/profile";
+import { useState } from "react";
 import { empresa1, empresa2, empresa3 } from "./empresaInputs";
 
 export default function Empresa(props: any) {
+  const [inputs, setInputs] = useState([
+    {
+      condition: props.type === "TRANSPORTADOR",
+      inputs: empresa1,
+      add: "",
+    },
+    {
+      condition: true,
+      inputs: empresa2,
+      add: "Adicionar mais unidades",
+    },
+    {
+      condition: true,
+      inputs: empresa3,
+      add: "Adicionar mais contatos",
+    },
+  ]);
+
   return (
     <div className="page">
       <InputCard>
         <ProfileInput type={props.type} />
       </InputCard>
-      {props.type === "TRANSPORTADOR" && <InputCard {...empresa1} />}
-      <InputCard {...empresa2} />
-      <InputCard {...empresa3} />
+      {inputs.map(
+        (input, index) =>
+          input.condition && (
+            <InputCard
+              {...input.inputs}
+              add={input.add}
+              setInputs={setInputs}
+              key={index}
+              index={index}
+              item={input}
+            />
+          )
+      )}
     </div>
   );
 }
@@ -26,10 +55,11 @@ function ProfileImage() {
         flexDirection: "column",
         alignItems: "center",
         gap: 25,
+        minWidth: "30%",
       }}
     >
       <img src={placeholderImg} height="150" alt="Profile" />
-      <div className="flex j-even">
+      <div className="flex j-even" style={{ fontSize: 15 }}>
         <p
           style={{
             margin: "0 10px",
@@ -88,7 +118,7 @@ function ProfileInput(props: any) {
             label="CNPJ"
             name="cnpj"
             placeholder="12.345.678/0001-12"
-            required
+            disabled
           />
           <Input
             width="45%"
@@ -123,7 +153,6 @@ function ProfileInput(props: any) {
           label="Facebook"
           name="facebook"
           placeholder="facebook.com/empresa"
-          required
         />
         <Input
           width="30%"
@@ -131,7 +160,6 @@ function ProfileInput(props: any) {
           label="Instagram"
           name="instagram"
           placeholder="instagram.com/empresa"
-          required
         />
         <Input
           width="30%"
@@ -139,7 +167,6 @@ function ProfileInput(props: any) {
           label="Linkedin"
           name="linkedin"
           placeholder="linkedin.com/empresa"
-          required
         />
       </div>
       <div>
@@ -151,7 +178,6 @@ function ProfileInput(props: any) {
           placeholder="Conte um pouco sobre a história, as atividades... até 500 caracteres"
           height="200px"
           maxLength={500}
-          required
         />
       </div>
       {props.type === "TRANSPORTADOR" && (

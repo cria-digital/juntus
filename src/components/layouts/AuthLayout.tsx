@@ -3,9 +3,10 @@ import styles from "styles/pages/AuthLayout.module.scss";
 
 interface IProps {
   children: JSX.Element;
+  steps?: number;
 }
 
-export default function AuthLayout({ children }: IProps) {
+export default function AuthLayout({ children, steps }: IProps) {
   return (
     <main className={styles.container}>
       <div className={styles.form_container}>
@@ -13,6 +14,7 @@ export default function AuthLayout({ children }: IProps) {
           <img src={logo} alt="logo" />
         </div>
         {children}
+        <div className={styles.steps} data-steps={steps} />
       </div>
     </main>
   );

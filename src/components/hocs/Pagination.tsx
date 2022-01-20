@@ -1,55 +1,147 @@
 import Input from "components/common/Input";
 import Loading from "components/common/Loading";
-import { useState } from "react";
-
-const chunk = (arr: any, size: number) =>
-  Array.from({ length: Math.ceil(arr.length / size) }, (v: any, i: any) =>
-    arr.slice(i * size, i * size + size)
-  );
+import { useEffect, useState } from "react";
+import { FiDownload } from "react-icons/fi";
+import { IconContext } from "react-icons/lib";
 
 export default function Pagination(props: any) {
   const [pageIndex, setPage] = useState(1);
-  const { search = true } = props;
+  const [filterValue, setFilterValue] = useState("");
+  const [filteredItems, setFilteredItems] = useState(props.items);
+  const { search = true, containerProps = {} } = props;
+
+  useEffect(() => {
+    const results = [];
+
+    for (let item of props.items) {
+      if (
+        Object.values(item).filter((i) => {
+          return i.toString().toLowerCase().includes(filterValue.toLowerCase());
+        }).length
+      )
+        results.push(item);
+    }
+
+    setFilteredItems(results);
+  }, [filterValue, props.items]);
 
   if (!props.items.length) return <Loading />;
 
-  const dividedItems = chunk(props.items, props.limit);
-  const pagesNumber = Math.floor(dividedItems.length / props.limit);
-  const pagesArray = Array.from(Array(pagesNumber).keys());
+  const dividedItems = filteredItems
+    .map((_: any, index: number) => {
+      if (index % props.limit === 0) {
+        return props.items.slice(index, index + props.limit);
+      }
+    })
+    .filter((item: any) => !!item);
+
+  console.log(dividedItems);
+
+  const pagesArray = dividedItems
+    .map((items, index) => {
+      if (items) return index;
+    })
+    .filter((i) => i !== undefined);
+
+  console.log(pagesArray);
+
+  const handleDownload = () => {};
+
+  //
 
   const { Component } = props;
 
   return (
     <div className="pagination">
       {search && (
-        <div style={{ width: "30%", marginLeft: "auto", marginRight: "5%" }}>
-          <Input
-            type="search"
-            name="page"
-            placeholder="Busque por origem, veículo, carroceria..."
-          />
+        <div
+          className="flex"
+          style={{
+            width: "fit-content",
+            justifyContent: "flex-end",
+            marginLeft: "auto",
+            gap: 50,
+            alignItems: "center",
+            marginRight: "5%",
+          }}
+        >
+          {props.download && (
+            <div
+              onClick={handleDownload}
+              style={{ height: 20, cursor: "pointer" }}
+            >
+              <IconContext.Provider
+                value={{ size: "25", color: "var(--JuntUs-Blue)" }}
+              >
+                <FiDownload />
+              </IconContext.Provider>
+            </div>
+          )}
+          <div style={{ width: "350px", marginLeft: "auto" }}>
+            <Input
+              value={filterValue}
+              onChange={(e) => setFilterValue(e.target.value)}
+              type="search"
+              name="page"
+              placeholder="Busque por origem, veículo, carroceria..."
+            />
+          </div>
         </div>
       )}
-      <div {...props.containerProps}>
-        {dividedItems[pageIndex - 1].map((item: any) => {
-          return <Component key={item.id} {...item} {...props.itemProps} />;
-        })}
-      </div>
+      {filteredItems.length > 0 ? (
+        <>
+          <div {...containerProps}>
+            {dividedItems[pageIndex - 1] &&
+              dividedItems[pageIndex - 1].map((item: any) => {
+                const filterFunction = () => {
+                  return Object.values(item).filter((i) => {
+                    return i
+                      .toString()
+                      .toLowerCase()
+                      .includes(filterValue.toLowerCase());
+                  }).length;
+                };
 
-      <div className="pagination-buttons">
-        {pagesArray.map((page: any) => {
-          return (
+                if (filterFunction())
+                  return (
+                    <Component key={item.id} {...item} {...props.itemProps} />
+                  );
+                return null;
+              })}
+          </div>
+
+          <div className="pagination-buttons">
             <button
-              disabled={pageIndex === page + 1}
-              key={page}
-              onClick={() => setPage(page + 1)}
-              className={page === page ? "active" : ""}
+              disabled={pageIndex === 1}
+              onClick={() => setPage((state) => state - 1)}
             >
-              {page + 1}
+              {"<"}
             </button>
-          );
-        })}
-      </div>
+            {pagesArray.map((page: number) => {
+              return (
+                <button
+                  disabled={pageIndex === page + 1}
+                  key={page}
+                  onClick={() => setPage(page + 1)}
+                  className={page + 1 === pageIndex ? "active" : ""}
+                >
+                  {page + 1}
+                </button>
+              );
+            })}
+            <button
+              disabled={pageIndex === Math.max(...pagesArray) + 1}
+              onClick={() => setPage((state) => state + 1)}
+            >
+              {">"}
+            </button>
+          </div>
+        </>
+      ) : (
+        <div style={{ textAlign: "center" }}>
+          <p>Nenhum resultado encontrado...</p>
+        </div>
+      )}
     </div>
   );
 }

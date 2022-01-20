@@ -68,6 +68,7 @@ export const empresa2 = {
         placeholder: "30000-000",
         type: "text",
         width: "45%",
+        mask: "99999-999",
         required: true,
       },
     ],
@@ -146,8 +147,8 @@ export const empresa3 = {
         label: "Telefone comercial",
         placeholder: "(31) 3000-0000",
         type: "text",
+        mask: "(99) 99999-9999",
         width: "45%",
-        required: true,
       },
     ],
     [
@@ -165,7 +166,6 @@ export const empresa3 = {
         placeholder: "Informe o capital social",
         type: "text",
         width: "45%",
-        required: true,
       },
     ],
     [
@@ -175,7 +175,6 @@ export const empresa3 = {
         placeholder: "Setor",
         type: "text",
         width: "45%",
-        required: true,
       },
       {
         name: "unidade",
@@ -183,7 +182,6 @@ export const empresa3 = {
         placeholder: "Informe a unidade",
         type: "text",
         width: "45%",
-        required: true,
       },
     ],
   ],

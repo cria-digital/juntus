@@ -45,6 +45,7 @@ export const operacao = {
       {
         name: "faixa_de_funcionarios",
         label: "Exigências básicas PGR",
+        maxLength: 500,
         placeholder: "Informe as exigências até 500 caracteres",
         type: "textarea",
         height: "150px",
@@ -54,6 +55,7 @@ export const operacao = {
       {
         name: "natureza_juridica",
         label: "Exigências tecnológicas",
+        maxLength: 500,
         placeholder: "Informe as exigências até 500 caracteres",
         type: "textarea",
         height: "150px",
@@ -70,6 +72,7 @@ export const operacao = {
         type: "textarea",
         height: "150px",
         width: "95%",
+        maxLength: 500,
         required: true,
       },
     ],

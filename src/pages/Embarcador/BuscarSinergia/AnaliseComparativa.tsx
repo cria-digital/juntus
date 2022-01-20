@@ -1,3 +1,4 @@
+import BackButton from "components/common/BackButton";
 import ProfileCard from "components/common/Cards/ProfileCard";
 
 const tableData = [
@@ -8,9 +9,10 @@ const tableData = [
 
 export default function AnaliseComparativa() {
   return (
-    <div className="mais-buscados analise-comparativa">
+    <div className="page analise-comparativa">
+      <BackButton to="/">Voltar para resultados da busca</BackButton>
       <div className="analise-list">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => (
+        {[1, 2, 3].map((item) => (
           <ProfileCard
             key={item}
             to={`/empresa/754`}
