@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styles from "styles/components/Sidebar.module.scss";
 
@@ -54,12 +54,31 @@ const pathnames = ["/login", "/password-change", "/register"];
 function Sidebar(props: any) {
   const [active, setIsActive] = useState(false);
 
+  const sidebarRef = useRef(null);
+
+  useEffect(() => {
+    function handleOutsideClick(e: any) {
+      if (!sidebarRef.current.contains(e.target)) setIsActive(false);
+    }
+
+    document.addEventListener("click", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, [active]);
+
   if (pathnames.includes(window.location.pathname)) return null;
 
   return (
-    <div className={styles.sidebar_container + " appear"} data-active={active}>
+    <div
+      ref={sidebarRef}
+      className={styles.sidebar_container + " appear"}
+      data-active={active}
+    >
       <div className={styles.sidebar}>
         <div
+          style={{ zIndex: "11" }}
           className={styles.nav_menu}
           onClick={() => setIsActive((active) => !active)}
         >

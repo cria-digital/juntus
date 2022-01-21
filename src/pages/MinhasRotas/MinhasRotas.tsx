@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchVolumes } from "helpers/api/sinergias";
 import Input from "components/common/Input";
 import Select from "components/common/Select";
+import { CadastrarCheckboxes } from "./CadastrarCheckboxes";
 
 const mySwal = withReactContent(Swal);
 
@@ -80,7 +81,7 @@ function Item(props: any) {
   const deleteRota = async () => {
     mySwal
       .fire({
-        title: <h3>EDITAR</h3>,
+        title: <h3>EXCLUIR</h3>,
         html: <p>Você tem certeza que deseja excluir essa rota?</p>,
         showCloseButton: true,
         confirmButtonText: "SIM",
@@ -144,6 +145,7 @@ function Item(props: any) {
                   label: i.nome,
                 }))}
               ></Select>
+              <CadastrarCheckboxes />
             </div>
           </form>
         ),

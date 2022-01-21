@@ -164,26 +164,35 @@ export default function BuscarSinergia() {
 
   const loadOptions = async (
     inputValue: string,
-    callback: (options: any) => void
+    callback: (options: any) => void,
+    select: any
   ) => {
+    if (inputValue.length < 2) return;
     const result = await fetchLocalidades(inputValue);
     const options = Array.isArray(result)
       ? result.map((item) => ({
           id: item.municipioId || item.estadoId,
-          label: item.nomeMunicipio || item.nomeEstado,
+          label: item.nomeMunicipio
+            ? `${item.nomeMunicipio}/${item.siglaEstado}`
+            : item.nomeEstado,
         }))
       : [];
     callback(options);
+
+    select.clearValue();
   };
 
   if (inputs.loading) return <Loading />;
 
   const getDefaultValuesSelect = (property: string) => {
     if (!data[property] || !data[property + "Id"]) return [];
-    return data[property + "Id"].map((item, i) => ({
-      label: data[property][i],
-      value: item,
-    }));
+    return data[property + "Id"].map((item, i) => {
+      if (data[property][i] && item)
+        return {
+          label: data[property][i],
+          value: item,
+        };
+    });
   };
 
   if (results.length)

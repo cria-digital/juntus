@@ -3,6 +3,7 @@ import CheckBox from "components/common/Checkbox";
 import Input from "components/common/Input";
 import Loading from "components/common/Loading";
 import Select from "components/common/Select";
+import { fetchLocalidades } from "helpers/api/buscarSinergia";
 import {
   cadastrarRota,
   fetchCarrocerias,
@@ -14,11 +15,6 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const mySwal = withReactContent(Swal);
-
-const options = Array.from(Array(10).keys()).map((i) => ({
-  id: i + 1,
-  label: i + 1,
-}));
 
 export default function CadastrarNovaRota() {
   const [veiculos, setVeiculos] = useState([]);
@@ -60,13 +56,6 @@ export default function CadastrarNovaRota() {
     }
   };
 
-  const changeField = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   const changeSelectField = (newValue: any) => {
     setData({
       ...data,
@@ -97,6 +86,31 @@ export default function CadastrarNovaRota() {
       });
   };
 
+  const changeAsyncField = async (value: any, name: string) => {
+    setData((state) => ({ ...state, [name]: value }));
+    return value;
+  };
+
+  const loadOptions = async (
+    inputValue: string,
+    callback: (options: any) => void,
+    select: any
+  ) => {
+    if (inputValue.length < 2) return;
+    const result = await fetchLocalidades(inputValue);
+    const options = Array.isArray(result)
+      ? result.map((item) => ({
+          id: item.municipioId || item.estadoId,
+          label: item.nomeMunicipio
+            ? `${item.nomeMunicipio}/${item.siglaEstado}`
+            : item.nomeEstado,
+        }))
+      : [];
+    callback(options);
+
+    select.clearValue();
+  };
+
   if (!veiculos.length || !carrocerias.length || !transportesMes.length)
     return <Loading />;
 
@@ -107,22 +121,30 @@ export default function CadastrarNovaRota() {
       </p>
       <form onSubmit={handleSubmit}>
         <div style={{ display: "flex" }}>
-          <Input
+          <Select
             width="45%"
+            placeholder="Digite a região de origem"
             type="text"
             label="Origem da carga"
             name="municipioOrigemId"
-            placeholder="Digite a região de origem"
-            onChange={changeField}
+            onChange={(value: any) =>
+              changeAsyncField(value, "municipioOrigemId")
+            }
+            loadOptions={loadOptions}
+            async={true}
             required
           />
-          <Input
+          <Select
             width="45%"
+            placeholder="Digite a região de destino"
             type="text"
             label="Destino da carga"
             name="municipioDestinoId"
-            placeholder="Digite a região de destino"
-            onChange={changeField}
+            onChange={(value: any) =>
+              changeAsyncField(value, "municipioDestinoId")
+            }
+            loadOptions={loadOptions}
+            async={true}
             required
           />
         </div>

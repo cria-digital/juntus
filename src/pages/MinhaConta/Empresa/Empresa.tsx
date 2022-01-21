@@ -3,6 +3,7 @@ import Button from "components/common/Button";
 import InputCard from "components/common/Cards/InputCard";
 import Input from "components/common/Input";
 import Loading from "components/common/Loading";
+import Select from "components/common/Select";
 import { editProfile } from "helpers/api/profile";
 import { useEffect, useState } from "react";
 import { getTransportadoraFields, empresa3, getFields } from "./empresaInputs";
@@ -203,13 +204,17 @@ function ProfileInput(props: any) {
       </div>
       {props.type === "TRANSPORTADOR" && (
         <div className="flex" style={{ justifyContent: "flex-start" }}>
-          <Input
+          <Select
             width="30%"
             type="text"
             label="Tipo de transporte"
             name="tipo_transporte"
             placeholder="Selecione o tipo de transporte"
             left="1.5%"
+            options={[
+              { value: "1", label: "Fracionado" },
+              { value: "2", label: "Lotação" },
+            ]}
             required
           />
         </div>

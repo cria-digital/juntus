@@ -1,3 +1,8 @@
+
+svg {
+    pointer-events: none !important;
+  }
+
 .mais-buscados, .minhas-visitas, .cadastrar-nova-rota, .convidados, .selo, .profile {
     width: 90%;
     margin: 40px auto;

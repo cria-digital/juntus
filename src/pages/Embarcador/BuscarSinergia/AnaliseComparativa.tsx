@@ -34,6 +34,7 @@ export default function AnaliseComparativa() {
       <BackButton to="/" state={{ state: { section: "Buscar Sinergia" } }}>
         Voltar para resultados da busca
       </BackButton>
+      <p style={{ textAlign: "center" }}>Selecione empresas para comparar...</p>
     </div>
   );
 }
