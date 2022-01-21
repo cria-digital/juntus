@@ -321,12 +321,18 @@ code {
 
 .swal2-actions {
   margin-left: auto;
-  margin-right: 32px;
+  margin-right: 32px !important;
+  flex-direction: row-reverse;
 }
 
-.swal2-actions button {
+.swal2-actions button:not(.swal2-cancel) {
   min-width: 140px;
   background-color: var(--JuntUs-Blue) !important;
+}
+
+.swal2-actions button.swal2-cancel {
+  min-width: 140px;
+  background-color: var(--JuntUs-Orange) !important;
 }
 
 .back-button {

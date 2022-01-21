@@ -86,6 +86,8 @@ function Item(props: any) {
         html: <p>Você tem certeza que deseja excluir essa rota?</p>,
         showCloseButton: true,
         confirmButtonText: "SIM",
+        cancelButtonText: "NÃO",
+        showCancelButton: true,
       })
       .then(async (result) => {
         if (result) {
