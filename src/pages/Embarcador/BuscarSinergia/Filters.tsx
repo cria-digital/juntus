@@ -62,9 +62,9 @@ export function Filters({ inputs, setFilters, changeSelectField }) {
           }))}
         />
       </div>
-      <div className="flex">
+      <div className="flex" style={{ width: "50%" }}>
         <Select
-          width="22%"
+          width="44%"
           placeholder="Filtre pelo selo JuntUs"
           label="Selo Juntos"
           name="selos"
@@ -73,9 +73,10 @@ export function Filters({ inputs, setFilters, changeSelectField }) {
             value: data.id,
             label: data.nome,
           }))}
+          left="3%"
         />
         <Select
-          width="22%"
+          width="44%"
           placeholder="Filtre pela avaliação"
           label="Avaliação"
           name="avaliacao"
@@ -84,6 +85,7 @@ export function Filters({ inputs, setFilters, changeSelectField }) {
             value: data,
             label: data,
           }))}
+          left="3%"
         />
       </div>
       <div className="buttons-container">

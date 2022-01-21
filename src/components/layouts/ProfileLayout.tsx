@@ -6,6 +6,7 @@ import Card from "components/common/Cards/Card";
 import Table from "components/common/Table";
 import ColumnChart from "components/common/Charts/ColumnChart";
 import DonutChart from "components/common/Charts/DonutChart";
+import { useLocation } from "react-router-dom";
 
 export default function ProfileLayout({ state, charts = false }) {
   return (

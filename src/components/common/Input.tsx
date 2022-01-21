@@ -4,6 +4,8 @@ import { IconContext } from "react-icons/lib";
 import { MdFileUpload, MdSearch } from "react-icons/md";
 import InputMask from "react-input-mask";
 import styles from "styles/components/Input.module.scss";
+import TextInput from "react-autocomplete-input";
+import "react-autocomplete-input/dist/bundle.css";
 
 const getIcon = (type: string) =>
   type === "search" ? <MdSearch /> : type === "file" ? <MdFileUpload /> : null;
@@ -56,10 +58,20 @@ export default function Input(props: IInputProps) {
               <InputMask
                 oninvalid={() => setIsInvalid(true)}
                 id={props.name}
+                name={props.name}
+                onChange={(e) => props.changeAutoComplete(e, props.name)}
                 {...props}
               />
               {isInvalid && <span>Invalido</span>}
             </>
+          ) : props.autoComplete ? (
+            <TextInput
+              trigger=""
+              options={["teste"]}
+              className="autocomplete"
+              id={props.name}
+              {...props}
+            />
           ) : (
             <input id={props.name} {...props} />
           )}

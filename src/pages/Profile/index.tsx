@@ -12,6 +12,7 @@ import {
 import ProfileLayout from "components/layouts/ProfileLayout";
 import Loading from "components/common/Loading";
 import Card from "components/common/Cards/Card";
+import BackButton from "components/common/BackButton";
 
 const initialState = {
   loading: true,
@@ -58,5 +59,10 @@ export default function Profile(props: any) {
         <ProfileLayout charts={props.type !== "EMBARCADOR"} state={state} />
       </Card>
     );
-  return <ProfileLayout charts={props.type === "EMBARCADOR"} state={state} />;
+  return (
+    <>
+      <BackButton to="/">Voltar para busca</BackButton>
+      <ProfileLayout charts={props.type === "EMBARCADOR"} state={state} />
+    </>
+  );
 }

@@ -4,7 +4,11 @@ import CheckBox from "components/common/Checkbox";
 import Input from "components/common/Input";
 import Loading from "components/common/Loading";
 import Select from "components/common/Select";
-import { fetchSinergia, saveFilter } from "helpers/api/buscarSinergia";
+import {
+  fetchLocalidades,
+  fetchSinergia,
+  saveFilter,
+} from "helpers/api/buscarSinergia";
 import * as api from "helpers/api/sinergias";
 import { IFilter } from "helpers/interfaces";
 import { useEffect, useRef, useState } from "react";
@@ -43,6 +47,11 @@ const getDefaultValue = (data) => ({
 export default function BuscarSinergia() {
   const [save, setSave] = useState<boolean>(false);
   const [compararList, setCompararList] = useState<any[]>([]);
+  const [options, setOptions] = useState<any>({
+    nomeMunicipioDestino: [],
+    nomeMunicipioOrigem: [],
+  });
+
   const [inputs, setInputs] = useState<any>({
     loading: true,
   });
@@ -100,8 +109,13 @@ export default function BuscarSinergia() {
   }, []);
 
   const changeField = (e: any) => {
-    const { name, value } = e.target;
+    const { value, name } = e.target;
     setData({ ...data, [name]: value });
+  };
+
+  const changeAsyncField = async (value: any, name: string) => {
+    setData((state) => ({ ...state, [name]: value }));
+    return value;
   };
 
   const handleSubmit = async (e: any) => {
@@ -150,6 +164,20 @@ export default function BuscarSinergia() {
     return newValue;
   };
 
+  const loadOptions = async (
+    inputValue: string,
+    callback: (options: any) => void
+  ) => {
+    const result = await fetchLocalidades(inputValue);
+    const options = Array.isArray(result)
+      ? result.map((item) => ({
+          id: item.municipioId || item.estadoId,
+          label: item.nomeMunicipio || item.nomeEstado,
+        }))
+      : [];
+    callback(options);
+  };
+
   if (inputs.loading) return <Loading />;
 
   const getDefaultValuesSelect = (property: string) => {
@@ -181,23 +209,33 @@ export default function BuscarSinergia() {
 
       <form onSubmit={handleSubmit}>
         <div className="flex">
-          <Input
-            onChange={changeField}
+          <Select
+            options={options.nomeMunicipioDestino}
             width="30%"
             placeholder="Digite a região de origem"
             type="text"
             label="Origem da carga"
             name="nomeMunicipioOrigem"
             defaultValue={data.municipioOrigemId}
+            onChange={(value: any) =>
+              changeAsyncField(value, "nomeMunicipioOrigem")
+            }
+            loadOptions={loadOptions}
+            async={true}
           />
-          <Input
-            onChange={changeField}
+          <Select
+            options={options.nomeMunicipioDestino}
             width="30%"
             placeholder="Digite a região de destino"
             type="text"
             label="Destino da carga"
             name="nomeMunicipioDestino"
             defaultValue={data.municipioDestinoId}
+            onChange={(value: any) =>
+              changeAsyncField(value, "municipioDestinoId")
+            }
+            loadOptions={loadOptions}
+            async={true}
           />
 
           <Select

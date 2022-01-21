@@ -30,3 +30,13 @@ export const fetchBuscas = async () => {
 
   return result;
 };
+
+export const fetchLocalidades = async (local: string) => {
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}/localidade/${local}`
+  );
+  const result = await response.json();
+  console.log(result);
+
+  return result || [];
+};

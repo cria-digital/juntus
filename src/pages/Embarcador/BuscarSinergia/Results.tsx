@@ -10,15 +10,18 @@ import BackButton from "components/common/BackButton";
 import { Filters } from "./Filters";
 import BuscaCard from "components/common/Cards/BuscaCard";
 
-const contains = (arr1, arr2) => arr2.some((ai) => arr1.includes(ai));
+const contains = (value, arr) => {
+  console.log("TAMANHO ", value);
+  return value !== null ? arr.includes(value) : true;
+};
 
 export const MySwal = withReactContent(Swal);
 
 const initialState = {
-  veiculos: [],
-  carrocerias: [],
-  servicos: [],
-  volumes: [],
+  veiculos: null,
+  carrocerias: null,
+  servicos: null,
+  licencasId: null,
 };
 
 export default function Results({ inputs, results, ...props }) {
@@ -55,14 +58,14 @@ export default function Results({ inputs, results, ...props }) {
         !item.veiculos ||
         !item.carrocerias ||
         !item.servicos ||
-        !item.volumes
+        !item.licencasId
       )
         continue;
       if (
-        contains(filters.veiculos, item.veiculos) ||
-        contains(filters.carrocerias, item.carrocerias) ||
-        contains(filters.servicos, item.servicos) ||
-        contains(filters.volumes, item.volumes)
+        contains(filters.veiculos, item.veiculosId) &&
+        contains(filters.carrocerias, item.carroceriaId) &&
+        contains(filters.servicos, item.servicosId) &&
+        contains(filters.licencasId, item.licencasId)
       ) {
         results.push(item);
       }
@@ -137,7 +140,7 @@ export default function Results({ inputs, results, ...props }) {
           filters.carrocerias,
           filters.servicos,
           filters.veiculos,
-          filters.volumes,
+          filters.licencasId,
           filter,
         ]}
         search={false}

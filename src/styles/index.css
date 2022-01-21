@@ -347,3 +347,20 @@ code {
   flex-direction: column;
   gap: 10px;
 }
+
+.autocomplete {
+  height: 30px !important;
+  min-width: 280px !important;
+  width: 100%;
+  overflow: hidden;
+}
+
+.react-autocomplete-input {
+  width: 280px;
+  border-radius: 5px;
+}
+
+.react-autocomplete-input li {
+  border-radius: 5px;
+
+}

@@ -137,14 +137,13 @@
 
   .analise-list {
       display: flex;
-      overflow-x: scroll;
       padding-bottom: 25px;
-      max-width: 80vw;
       gap: 25px;
   }
 
   .big-profile {
-      min-width: 500px !important;
+      min-width: 300px !important;
+      max-width: 25vw;
       min-height: 60vh;
 
       img {

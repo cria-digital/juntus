@@ -1,7 +1,7 @@
 import { IconContext } from "react-icons/lib";
 import styles from "styles/components/Input.module.scss";
 import ReactSelect from "react-select";
-import { IInputProps } from "helpers/interfaces";
+import AsyncSelect from "react-select/async";
 
 interface IProps {
   type?: string;
@@ -21,6 +21,9 @@ interface IProps {
   children?: any;
   id?: string;
   defaultValue?: any;
+  left?: string;
+  async?: boolean;
+  loadOptions?: any;
 }
 
 export default function Select(props: IProps) {
@@ -30,7 +33,7 @@ export default function Select(props: IProps) {
     "data-value": !!value,
     "data-error": error,
     "data-disabled": disabled,
-    style: { width: width || "100%" },
+    style: { width: width || "100%", marginLeft: props.left || "auto" },
   };
 
   console.log(props);
@@ -50,12 +53,21 @@ export default function Select(props: IProps) {
           </label>
         )}
         <div className={styles.input}>
-          <ReactSelect
-            isMulti={props.multiple}
-            className={styles.selectMultiple}
-            onInputChange={props.onChange}
-            {...props}
-          />
+          {props.async ? (
+            <AsyncSelect
+              className={styles.selectMultiple}
+              onInputChange={props.onChange}
+              onChange={null}
+              {...props}
+            />
+          ) : (
+            <ReactSelect
+              isMulti={props.multiple}
+              className={styles.selectMultiple}
+              onInputChange={props.onChange}
+              {...props}
+            />
+          )}
         </div>
       </div>
     </IconContext.Provider>

@@ -71,5 +71,8 @@ export interface IInputProps {
   mask?: string;
   defaultValue?: string | number;
   id?: string;
+  autoComplete?: string;
   left?: string;
+  changeAutoComplete?: any;
+  options?: any;
 }

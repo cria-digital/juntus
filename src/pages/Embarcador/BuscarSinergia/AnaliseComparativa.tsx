@@ -13,17 +13,41 @@ export default function AnaliseComparativa() {
         </BackButton>
         <div className="analise-list">
           {JSON.parse((location.state as any).compararList).map((item) => (
-            <ProfileCard
-              key={item}
-              to={`/empresa/${item.empresaId}`}
-              name={item.nomeEmpresa}
-              big
-              tableData={[
-                { name: "Veículos", value: item.veiculos.join(", ") },
-                { name: "Carrocerias", value: item.carrocerias.join(", ") },
-                { name: "Carro chefe", value: item.servicos[0] },
-              ]}
-            />
+            <>
+              <ProfileCard
+                key={item}
+                to={`/empresa/${item.empresaId}`}
+                name={item.nomeEmpresa}
+                big
+                tableData={[
+                  { name: "Veículos", value: item.veiculos.join(", ") },
+                  { name: "Carrocerias", value: item.carrocerias.join(", ") },
+                  { name: "Carro chefe", value: item.servicos[0] },
+                ]}
+              />
+              <ProfileCard
+                key={item}
+                to={`/empresa/${item.empresaId}`}
+                name={item.nomeEmpresa}
+                big
+                tableData={[
+                  { name: "Veículos", value: item.veiculos.join(", ") },
+                  { name: "Carrocerias", value: item.carrocerias.join(", ") },
+                  { name: "Carro chefe", value: item.servicos[0] },
+                ]}
+              />
+              <ProfileCard
+                key={item}
+                to={`/empresa/${item.empresaId}`}
+                name={item.nomeEmpresa}
+                big
+                tableData={[
+                  { name: "Veículos", value: item.veiculos.join(", ") },
+                  { name: "Carrocerias", value: item.carrocerias.join(", ") },
+                  { name: "Carro chefe", value: item.servicos[0] },
+                ]}
+              />
+            </>
           ))}
         </div>
       </div>
