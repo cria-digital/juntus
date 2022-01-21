@@ -18,6 +18,7 @@ import { fetchVolumes } from "helpers/api/sinergias";
 import Input from "components/common/Input";
 import Select from "components/common/Select";
 import { CadastrarCheckboxes } from "./CadastrarCheckboxes";
+import { fetchLocalidades } from "helpers/api/buscarSinergia";
 
 const mySwal = withReactContent(Swal);
 
@@ -96,6 +97,26 @@ function Item(props: any) {
       });
   };
 
+  const loadOptions = async (
+    inputValue: string,
+    callback: (options: any) => void,
+    select: any
+  ) => {
+    if (inputValue.length < 2) return;
+    const result = await fetchLocalidades(inputValue);
+    const options = Array.isArray(result)
+      ? result.map((item) => ({
+          id: item.municipioId || item.estadoId,
+          label: item.nomeMunicipio
+            ? `${item.nomeMunicipio}/${item.siglaEstado}`
+            : item.nomeEstado,
+        }))
+      : [];
+    callback(options);
+
+    select.clearValue();
+  };
+
   const editRota = async () => {
     mySwal
       .fire({
@@ -103,30 +124,30 @@ function Item(props: any) {
         html: (
           <form>
             <div style={{ display: "flex" }}>
-              <Input
+              <Select
                 width="45%"
+                placeholder="Digite a região de origem"
                 type="text"
                 label="Origem da carga"
                 name="municipioOrigemId"
                 id="municipioOrigemId"
-                placeholder="Digite a região de origem"
-                defaultValue={municipioOrigem}
-                onChange={(e) => {
-                  e.target.value = e.target.value;
-                }}
+                onChange={() => {}}
+                loadOptions={loadOptions}
+                defaultValue={{ label: municipioOrigem, id: municipioOrigem }}
+                async={true}
                 required
               />
-              <Input
+              <Select
                 width="45%"
+                placeholder="Digite a região de destino"
                 type="text"
                 label="Destino da carga"
-                defaultValue={municipioDestino}
                 name="municipioDestinoId"
                 id="municipioDestinoId"
-                placeholder="Digite a região de destino"
-                // onChange={({target} => {
-                //   target.value = target.value;
-                // })}
+                defaultValue={{ label: municipioDestino, id: municipioDestino }}
+                onChange={() => {}}
+                loadOptions={loadOptions}
+                async={true}
                 required
               />
             </div>
@@ -152,31 +173,18 @@ function Item(props: any) {
         showCloseButton: true,
         confirmButtonText: "EDITAR",
         preConfirm: () => {
-          const municipioOrigemId = (
-            Swal.getPopup().querySelector(
-              "#municipioOrigemId"
-            ) as HTMLInputElement
-          ).value;
-          const municipioDestinoId = (
-            Swal.getPopup().querySelector(
-              "#municipioDestinoId"
-            ) as HTMLInputElement
-          ).value;
           const transportesMesId = (
             Swal.getPopup().querySelector("#transportesMes") as HTMLInputElement
           ).value;
 
-          if (!municipioOrigemId || !municipioDestinoId) {
-            Swal.showValidationMessage(`Por favor, insira de forma válida`);
-          }
-          return { municipioOrigemId, municipioDestinoId, transportesMesId };
+          return { transportesMesId };
         },
       })
       .then(async (result) => {
         await editarRota({
           id: props.id,
-          municipioOrigemId: result.value.municipioOrigemId,
-          municipioDestinoId: result.value.municipioDestinoId,
+          municipioOrigemId: municipioOrigem,
+          municipioDestinoId: municipioDestino,
           transportesMesId: result.value.transportesMesId,
         });
       });
