@@ -4,7 +4,6 @@ export const fetchSinergia = async (filter: any = {}) => {
     { method: "POST", body: JSON.stringify(filter) }
   );
   const result = await response.json();
-  console.log(result);
 
   return [result];
 };
@@ -16,8 +15,6 @@ export const saveFilter = async (filter: any) => {
   );
   const result = await response.json();
 
-  console.log(result);
-
   return result;
 };
 
@@ -26,7 +23,6 @@ export const fetchBuscas = async () => {
     `${process.env.REACT_APP_API_URL}/sinergia/filtro`
   );
   const result = await response.json();
-  console.log(result);
 
   return result;
 };
@@ -36,7 +32,6 @@ export const fetchLocalidades = async (local: string) => {
     `${process.env.REACT_APP_API_URL}/localidade/${local}`
   );
   const result = await response.json();
-  console.log(result);
 
   return result || [];
 };

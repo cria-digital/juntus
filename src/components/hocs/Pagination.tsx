@@ -26,7 +26,6 @@ export default function Pagination(props: any) {
   }, [filterValue, props.items]);
 
   useEffect(() => {
-    console.log("TESTE");
     if (props.customFilterFunction) {
       props.customFilterFunction(setFilteredItems, props.items);
       return;
@@ -43,15 +42,11 @@ export default function Pagination(props: any) {
     })
     .filter((item: any) => !!item);
 
-  console.log(dividedItems);
-
   const pagesArray = dividedItems
     .map((items, index) => {
       if (items) return index;
     })
     .filter((i) => i !== undefined);
-
-  console.log(pagesArray);
 
   const handleDownload = () => {};
 

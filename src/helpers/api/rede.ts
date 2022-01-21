@@ -1,7 +1,7 @@
 export const fetchRedes = async () => {
   const response = await fetch(`${process.env.REACT_APP_API_URL}/rede`);
   const redes = await response.json();
-  console.log(redes);
+
   return redes;
 };
 
@@ -10,7 +10,7 @@ export const fetchConvidados = async () => {
     `${process.env.REACT_APP_API_URL}/rede/convidados`
   );
   const convidados = await response.json();
-  console.log(convidados);
+
   return convidados;
 };
 
@@ -23,6 +23,5 @@ export const sendRequest = async (data: any) => {
     }
   ).then((res) => res.json());
 
-  console.log(response);
   return response;
 };

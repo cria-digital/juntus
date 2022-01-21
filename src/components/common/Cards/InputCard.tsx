@@ -23,8 +23,6 @@ export default function InputCard(props: IProps) {
       </Card>
     );
 
-  console.log(props.add);
-
   const addState = () => {
     props.setInputs((state: any[]) => [...state, props.item]);
   };

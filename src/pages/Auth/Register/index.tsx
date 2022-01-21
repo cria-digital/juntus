@@ -44,8 +44,7 @@ export default function Register() {
     e.preventDefault();
 
     for (let field of Object.values(data)) {
-      if (field.toString().trim() === "")
-        return alert("Preencha todos os campos!");
+      if (field.toString().trim() === "") return;
     }
 
     setState((state) => ({ ...state, success: true }));
@@ -54,12 +53,10 @@ export default function Register() {
   const nextSection = (e: any) => {
     e.preventDefault();
 
-    if (data.password !== data.confirmPassword)
-      return alert("As senhas não conferem!");
+    if (data.password !== data.confirmPassword) return;
 
     for (let input of state.sections[state.section]) {
-      if (data[input.name].trim() === "")
-        return alert("Preencha todos os campos");
+      if (data[input.name].trim() === "") return;
     }
 
     setState((state) => ({ ...state, section: state.section + 1 }));

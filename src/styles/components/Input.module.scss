@@ -13,6 +13,28 @@ $error-label-color: #D9342B;
         margin-left: 8px;
     }
 
+    &[data-invalid="true"] {
+        label {
+            color: var(--JuntUs-Red);
+        }
+
+        .input {
+            color: var(--JuntUs-Red);
+            border: 1px solid var(--JuntUs-Red);
+
+            
+
+            &::before {
+                position: absolute;
+                font-size: 12px;
+                width: 200px;
+                color: var(--JuntUs-Red);
+                content: "Este campo é obrigatório";
+                transform: translateY(35px);
+            }
+        }
+    }
+
     .input {
         font-family: 'Open Sans', sans-serif;
         background: var(--White);
@@ -24,6 +46,10 @@ $error-label-color: #D9342B;
         box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.16);
         border-radius: 4px;
         padding-left: 8px;
+
+        
+
+       
     }
 
     .input textarea {

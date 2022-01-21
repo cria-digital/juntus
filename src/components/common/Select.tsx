@@ -36,8 +36,6 @@ export default function Select(props: IProps) {
     style: { width: width || "100%", marginLeft: props.left || "auto" },
   };
 
-  console.log(props);
-
   return (
     <IconContext.Provider
       value={{

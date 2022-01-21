@@ -63,8 +63,6 @@ export default function Operacao(props: any) {
           },
         ];
 
-        console.log(result);
-
         setTransportadora(result);
       };
 

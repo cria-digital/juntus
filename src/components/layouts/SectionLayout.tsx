@@ -16,7 +16,6 @@ export default function SectionLayout(props: IProps) {
   };
 
   const location = useLocation();
-  console.log(location);
 
   useEffect(() => {
     setSection(props.sections[0].title);

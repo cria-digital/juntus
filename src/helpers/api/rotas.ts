@@ -10,7 +10,7 @@ const cadastrarExemplo = {
 export const fetchRotas = async () => {
   const response = await fetch(`${process.env.REACT_APP_API_URL}/rota`);
   const rotas = await response.json();
-  console.log(rotas);
+
   return rotas;
 };
 
@@ -20,7 +20,7 @@ export const cadastrarRota = async (rota: any) => {
     body: JSON.stringify(rota),
   });
   const result = await response.json();
-  console.log(result);
+
   return result;
 };
 
@@ -30,7 +30,7 @@ export const editarRota = async (rota: any) => {
     body: JSON.stringify(rota),
   });
   const result = await response.json();
-  console.log(result);
+
   return result;
 };
 
@@ -41,20 +41,20 @@ export const excluirRota = async (id: number) => {
       method: "DELETE",
     }
   );
-  console.log(response);
+
   return response;
 };
 
 export const fetchVeiculos = async () => {
   const response = await fetch(`${process.env.REACT_APP_API_URL}/veiculo`);
   const veiculos = await response.json();
-  console.log(veiculos);
+
   return veiculos;
 };
 
 export const fetchCarrocerias = async () => {
   const response = await fetch(`${process.env.REACT_APP_API_URL}/carroceria`);
   const carrocerias = await response.json();
-  console.log(carrocerias);
+
   return carrocerias;
 };

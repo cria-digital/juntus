@@ -11,7 +11,6 @@ import { Filters } from "./Filters";
 import BuscaCard from "components/common/Cards/BuscaCard";
 
 const contains = (value, arr) => {
-  console.log("TAMANHO ", value);
   return value !== null ? arr.includes(value) : true;
 };
 
@@ -53,7 +52,6 @@ export default function Results({ inputs, results, ...props }) {
     const results = [];
 
     for (let item of items) {
-      console.log("ITEM ", item);
       if (
         !item.veiculos ||
         !item.carrocerias ||
@@ -105,7 +103,9 @@ export default function Results({ inputs, results, ...props }) {
             desejados.{" "}
           </p>
         </>
-      ) : null}
+      ) : (
+        <p> Consulte aqui seus filtros customizados de busca de sinergia </p>
+      )}
 
       {filter ? (
         <Filters

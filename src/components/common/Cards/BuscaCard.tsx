@@ -19,8 +19,6 @@ export default function BuscaCard(props: any) {
     navigate(`/empresa/${props.empresaId}`);
   };
 
-  console.log("PROPS ", props);
-
   const handleChange = () => {
     props.setCompararList((state: any[]) => {
       if (state.some((item: any) => item.id === props.id)) {
@@ -35,7 +33,7 @@ export default function BuscaCard(props: any) {
 
   const addToRede = async (e: any) => {
     e.preventDefault();
-    console.log("teste");
+
     await MySwal.fire({
       title: <h3>CONVITE ENVIADO</h3>,
       showCloseButton: true,

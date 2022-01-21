@@ -46,8 +46,6 @@ export default function CadastrarNovaRota() {
     fetchData();
   }, []);
 
-  console.log(transportesMes);
-
   const handleCheckbox = (id: number, target: string) => {
     if (!data[target].includes(id)) {
       setData((state) => ({

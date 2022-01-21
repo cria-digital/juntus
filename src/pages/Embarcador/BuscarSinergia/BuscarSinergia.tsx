@@ -60,8 +60,6 @@ export default function BuscarSinergia() {
 
   const location = useLocation();
 
-  console.log("location", location);
-
   if (location.state && (location.state as any).filter)
     filterState.current = JSON.parse((location.state as any).filter);
 

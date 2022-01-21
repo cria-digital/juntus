@@ -6,8 +6,6 @@ import MinhasRotas from "./MinhasRotas";
 export default function Rotas() {
   const router = useLocation();
 
-  console.log(router);
-
   return (
     <div className="rotas">
       <SectionLayout

@@ -12,7 +12,6 @@ const initialState = {
 };
 
 export function Filters({ inputs, setFilters, changeSelectField }) {
-  console.log(inputs);
   return (
     <>
       <div className="flex">

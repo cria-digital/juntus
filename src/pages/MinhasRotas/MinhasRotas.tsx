@@ -95,8 +95,6 @@ function Item(props: any) {
       });
   };
 
-  console.log(props);
-
   const editRota = async () => {
     mySwal
       .fire({
@@ -166,7 +164,6 @@ function Item(props: any) {
             Swal.getPopup().querySelector("#transportesMes") as HTMLInputElement
           ).value;
 
-          console.log(municipioOrigemId, municipioDestinoId, transportesMesId);
           if (!municipioOrigemId || !municipioDestinoId) {
             Swal.showValidationMessage(`Por favor, insira de forma válida`);
           }
@@ -174,7 +171,6 @@ function Item(props: any) {
         },
       })
       .then(async (result) => {
-        console.log(result.value);
         await editarRota({
           id: props.id,
           municipioOrigemId: result.value.municipioOrigemId,
@@ -210,7 +206,6 @@ function Item(props: any) {
             {expanded ? <BsChevronCompactUp /> : <BsChevronCompactDown />}
           </div>
         </div>
-        {console.log(props.carrocerias, props.veiculos, props.transportesMes)}
         {expanded && (
           <div className="expanded">
             <ul>

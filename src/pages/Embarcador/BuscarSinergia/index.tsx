@@ -68,7 +68,7 @@ function BuscasSalvas() {
   }, []);
 
   if (inputs.loading) return <Loading />;
-  console.log(inputs);
+
   return <Results results={buscas} inputs={inputs} Component={FilterCard} />;
 }
 
@@ -93,7 +93,6 @@ function FilterCard(props) {
 
   const addToRede = (e: any) => {
     e.preventDefault();
-    console.log("teste");
   };
 
   return (
